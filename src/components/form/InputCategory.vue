@@ -175,7 +175,7 @@
           });
       },
       getAddField(id) {
-        this.value = id;
+        this.newValue = id;
         this.firstCategory = true;
         this.secondCategory = false;
         this.categoryDone = true;
@@ -187,7 +187,7 @@
         this.thirdCategoryName = '';
         store.dispatch('category/ADD_FIELD', {id: id})
           .then(res => {
-            this.$emit('addFields', res.body, 'category');
+            this.$emit('addFields', res.body, 'category_id');
           });
       },
     },
@@ -235,8 +235,5 @@
     right: 0;
     width: 5px;
     background-color: #2196F3;
-  }
-  .v-navigation-drawer__border {
-    width: 5px;
   }
 </style>

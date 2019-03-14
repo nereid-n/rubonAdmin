@@ -5,6 +5,7 @@
           :label="data.label"
           :name="data.name"
           :items="data.items"
+          :value="value + ''"
           item-text="value"
           item-value="id"
           @focus="focus"

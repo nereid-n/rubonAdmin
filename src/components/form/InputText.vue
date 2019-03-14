@@ -3,6 +3,7 @@
     <v-flex md8 xs12>
       <v-text-field
           :name="data.name"
+          :value="value"
           @focus="focus"
           @input="input"
           @blur="blur"

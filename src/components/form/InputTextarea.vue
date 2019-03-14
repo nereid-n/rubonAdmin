@@ -4,6 +4,7 @@
       <v-textarea
           :label="data.label"
           :name="data.name"
+          :value="value"
           @focus="focus"
           @input="input"
           @blur="blur"

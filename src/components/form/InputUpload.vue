@@ -8,6 +8,7 @@
           @blur="blur"
       >
       </v-text-field>
+
       <input type="file"
              class="input-upload"
              @input="change"
@@ -16,11 +17,13 @@
       >
       <v-btn class="btn-upload">Browse</v-btn>
     </v-flex>
-    <v-flex md8 xs12 v-if="value.length > 0">
+
+    <v-flex md8 xs12 v-if="newValue.length > 0">
       <draggable class="layout row wrap">
-        <v-flex md4 sm6 xs12 v-for="(file, index) in value">
+        <v-flex md4 sm6 xs12 v-for="(file, index) in newValue">
           <v-card>
             <v-img :src="preview(file)"/>
+
             <v-card-title>
               {{ file.name }}
               <v-icon class="ml-auto" @click.prevent="drop(index)">close</v-icon>
@@ -41,24 +44,23 @@
     components: {draggable},
     data() {
       return {
-        value: []
+        newValue: ['https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg']
       }
     },
     methods: {
       change(e) {
         for (let i = 0; i < e.target.files.length; i++) {
           let file = e.target.files.item(i);
-          this.value.push(file);
-          this.input(this.value);
+          this.newValue.push(file);
+          this.input(this.newValue);
         }
       },
       preview(file) {
-
         return URL.createObjectURL(file)
       },
       drop(index) {
-        this.value.splice(index, 1);
-        this.input(this.value);
+        this.newValue.splice(index, 1);
+        this.input(this.newValue);
       },
     },
     mixins: [inputMixin],

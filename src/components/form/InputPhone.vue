@@ -4,10 +4,11 @@
       <v-text-field
           :label="data.label"
           :name="data.name"
+          :value="value"
           @focus="focus"
           @input="input"
           @blur="blur"
-          :mask="'+## (###) ###-##-##'"
+          mask="+## (###) ###-##-##"
       >
       </v-text-field>
     </v-flex>

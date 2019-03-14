@@ -8,8 +8,10 @@ import VeeValidate from 'vee-validate';
 import dictionaryRu from '../src/i18n/veeValidate/ru/dictionary.js';
 import VueResource from "vue-resource"
 import Vuebar from 'vuebar';
+import MainLayout from './views/layouts/MainLayout';
 
 Vue.use(Vuebar);
+Vue.component('main-layout', MainLayout);
 
 Vue.config.productionTip = false;
 

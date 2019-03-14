@@ -1,7 +1,7 @@
 export default {
   data() {
     return {
-      value: '',
+      newValue: '',
       showError: false,
       showHint: false
     }
@@ -13,19 +13,25 @@ export default {
     },
     error: {
       type: String
+    },
+    value: {
+      default: ''
     }
   },
   methods: {
     blur() {
       this.showHint = false;
-      this.$emit('blur', this.value);
+      this.$emit('blur', this.newValue);
     },
     focus() {
       this.showHint = true;
     },
     input(e) {
-      this.value = e;
-      this.$emit('input', this.value);
+      this.newValue = e;
+      this.$emit('input', this.newValue);
     }
+  },
+  created() {
+    this.newValue = this.value;
   }
 }

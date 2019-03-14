@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-xl>
-    <v-form>
+    <v-form v-if="getDataDone">
       <component v-for="input in dataFields"
                  :is="input.component"
                  :key="input.data.name"
@@ -29,14 +29,15 @@
   import store from '../store/store';
 
   export default {
-    name: "Form",
+    name: "AdAdd",
     components: {
       InputSelect,
       InputUpload, InputCategory, InputAutocomplete, InputCheckbox, InputPhone, InputTextarea, InputText},
     data() {
       return {
         value: {},
-        dataFields: []
+        dataFields: [],
+        getDataDone: false
       }
     },
     methods: {
@@ -98,12 +99,47 @@
             }
           }
           for (let i = 0; i < this.dataFields.length; i++) {
-            if (this.dataFields[i].data.name === 'city') {
+            if (this.dataFields[i].data.name === 'city_id') {
               this.dataFields[i].data.items = cities;
               break;
             }
           }
         });
+      if (this.$route.meta.action === 'UPDATE') {
+        let apiData = {
+          id: this.$route.params.id,
+          data: {
+            api_key: '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e',
+            expand: 'adsImgs,adsFieldsValues'
+          }
+        };
+        store.dispatch('ad/AD', apiData)
+          .then(res => {
+            this.value = res.body;
+            this.value.photos = [];
+            this.value.phone = this.value.phone.replace(/\D+/g,"");
+            this.getDataDone = true;
+            for (let value of this.value.adsFieldsValues) {
+              if (value.value_id !== null) {
+                this.value[value.ads_fields_name] = value.value_id;
+              }
+              else {
+                this.value[value.ads_fields_name] = value.value;
+              }
+            }
+            for (let value of this.value.adsImgs) {
+              this.value.photos.push(value.img);
+            }
+            console.log(res);
+            store.dispatch('category/ADD_FIELD', {id: this.value.category_id})
+              .then(res => {
+                this.addFields(res.body, 'category_id');
+              });
+          });
+      }
+      else {
+        this.getDataDone = true;
+      }
     }
   }
 </script>

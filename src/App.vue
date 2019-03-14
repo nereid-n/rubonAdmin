@@ -1,24 +1,19 @@
 <template>
   <v-app>
-    <v-content>
-      <Form/>
-    </v-content>
+    <component :is="layout">
+      <router-view/>
+    </component>
   </v-app>
 </template>
 
 <script>
 
-import Form from "./views/Form";
 export default {
   name: 'App',
-  components: {
-    Form
-
-  },
-  data () {
-    return {
-      //
-    }
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || 'main') + '-layout'
+    },
   }
 }
 </script>

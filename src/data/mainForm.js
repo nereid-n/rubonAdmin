@@ -18,7 +18,7 @@ export default [
       max: 1000
     },
     data: {
-      name: 'category',
+      name: 'category_id',
       label: 'Категория',
       hint: ''
     }
@@ -30,7 +30,7 @@ export default [
       max: 1000
     },
     data: {
-      name: 'description',
+      name: 'content',
       label: 'Описание',
       hint: '<b>Добавьте описание вашего товара/услуги,</b> укажите преимущества и важные детали.<br>В описании <b>не допускается указание контактных данных.</b><br>Описание должно соответствовать заголовку и предлагаемому товару/услуге.<br>Не допускаются заглавные буквы (кроме аббревиатур).'
     }
@@ -63,7 +63,7 @@ export default [
       required: true
     },
     data: {
-      name: 'city',
+      name: 'city_id',
       label: 'Город',
       hint: 'Выберите город из списка',
       items: []
@@ -85,7 +85,7 @@ export default [
     component: 'InputPhone',
     rules: {
       required: true,
-      min: 19
+      min: 12
     },
     data: {
       name: 'phone',

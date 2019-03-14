@@ -1,10 +1,10 @@
 export default {
     title: 'заголовок',
-    category: 'категория',
-    description: 'описание',
+    category_id: 'категория',
+    content: 'описание',
     price: 'цена',
     photos: 'фотографии',
-    city: 'город',
+    city_id: 'город',
     name: 'имя',
     phone: 'телефон',
     email: 'email',
