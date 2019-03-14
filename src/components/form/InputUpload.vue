@@ -18,7 +18,7 @@
     </v-flex>
     <v-flex md8 xs12 v-if="value.length > 0">
       <draggable class="layout row wrap">
-        <v-flex md4 xs12 v-for="(file, index) in value">
+        <v-flex md4 sm6 xs12 v-for="(file, index) in value">
           <v-card>
             <v-img :src="preview(file)"/>
             <v-card-title>

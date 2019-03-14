@@ -20,8 +20,7 @@ export default [
     data: {
       name: 'category',
       label: 'Категория',
-      hint: '',
-      body: 'CategoryModal'
+      hint: ''
     }
   },
   {
@@ -67,7 +66,7 @@ export default [
       name: 'city',
       label: 'Город',
       hint: 'Выберите город из списка',
-      items: ['one', 'two', 'three']
+      items: []
     }
   },
   {
@@ -115,7 +114,6 @@ export default [
     data: {
       name: 'agreed',
       label: '* Я соглашаюсь с правилами использования сервиса, а также с передачей и обработкой моих данных на RUB-ON. Я подтверждаю своё совершеннолетие и ответственность за размещение объявления',
-      hint: ''
     }
   },
 ]

@@ -1,16 +1,17 @@
 <template>
   <v-layout row wrap>
     <v-flex md8 xs12>
-      <v-text-field
+      <v-select
+          :label="data.label"
           :name="data.name"
+          :items="data.items"
+          item-text="value"
+          item-value="id"
           @focus="focus"
           @input="input"
           @blur="blur"
       >
-        <template v-slot:label>
-          <span v-html="data.label"></span>
-        </template>
-      </v-text-field>
+      </v-select>
     </v-flex>
     <v-flex md4 xs12>
       <FormAlert
@@ -27,7 +28,7 @@
   import FormAlert from "./FormAlert";
 
   export default {
-    name: "InputText",
+    name: "InputSelect",
     components: {FormAlert},
     mixins: [inputMixin]
   }

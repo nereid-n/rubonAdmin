@@ -5,6 +5,8 @@
           :label="data.label"
           :name="data.name"
           :items="data.items"
+          item-text="value"
+          item-value="id"
           @focus="focus"
           @input="input"
           @blur="blur"
@@ -26,7 +28,7 @@
   import FormAlert from "./FormAlert";
 
   export default {
-    name: "InputSelect",
+    name: "InputAutocomplete",
     components: {FormAlert},
     mixins: [inputMixin]
   }

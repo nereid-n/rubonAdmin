@@ -6,7 +6,6 @@
           width="850"
       >
         <template v-slot:activator="{ on }">
-          <div>
             <v-btn
                 v-if="!categoryDone"
                 flat
@@ -25,7 +24,6 @@
               Изменить категорию
             </v-btn>
             <div class="text-xs-center" v-if="categoryDone">{{nameStr}}</div>
-          </div>
         </template>
         <v-card>
           <v-card-title
@@ -41,7 +39,7 @@
             <v-layout row wrap class="justify-center">
               <div v-for="item in category"
                    class="category-item"
-                   @click="getSecondCategory(item.id, item.name, 'secondCategoryData', 'firstCategory')"
+                   @click="getSecondCategory(item.id, item.name, 'secondCategory', 'firstCategory')"
               >
                 {{item.name}}
               </div>
@@ -50,10 +48,15 @@
 
           <v-card-text v-else-if="secondCategory">
             <v-layout>
-              <div class="flex md4">
+              <div class="flex md4" v-if="!smallSizeWindow || activeTab === 'firstCategory'">
+                <h2 class="text-xs-center">Рубрики</h2>
                 <div v-bar class="category-second">
                   <v-list>
-                    <v-list-tile :color="item.id == firstCategoryActive ? 'blue' : ''" @click="getSecondCategory(item.id, item.name, 'secondCategoryData', 'firstCategory')" v-for="item in category">
+                    <v-list-tile :color="item.id == firstCategoryActive ? 'blue' : ''"
+                                 @click="getSecondCategory(item.id, item.name, 'secondCategory', 'firstCategory')"
+                                 v-for="item in category"
+                                 :key="`categoryModal${item.id}`"
+                    >
                       <v-list-tile-content>
                         <v-list-tile-title>
                           {{item.name}}
@@ -63,10 +66,20 @@
                   </v-list>
                 </div>
               </div>
-              <div class="flex md4">
+              <div class="flex md4" v-if="!smallSizeWindow || activeTab === 'secondCategory'">
+                <h2 class="text-xs-center"
+                    @click="activeTab = 'firstCategory'"
+                >
+                  <v-icon color="black" v-if="smallSizeWindow">arrow_back</v-icon>
+                  {{firstCategoryName}}
+                </h2>
                 <div v-bar class="category-second">
                   <v-list>
-                    <v-list-tile :color="item.id == secondCategoryActive ? 'blue' : ''" @click="getSecondCategory(item.id, item.name, 'thirdCategoryData', 'secondCategory')" v-for="item in secondCategoryData">
+                    <v-list-tile :color="item.id == secondCategoryActive ? 'blue' : ''"
+                                 @click="getSecondCategory(item.id, item.name, 'thirdCategory', 'secondCategory')"
+                                 v-for="item in secondCategoryData"
+                                 :key="`categoryModal${item.id}`"
+                    >
                       <v-list-tile-content>
                         <v-list-tile-title>
                           {{item.name}}
@@ -76,10 +89,19 @@
                   </v-list>
                 </div>
               </div>
-              <div class="flex md4" v-if="thirdCategoryData.length > 0">
+              <div class="flex md4" v-if="thirdCategoryData.length > 0 && !smallSizeWindow || activeTab === 'thirdCategory'">
+                <h2 class="text-xs-center"
+                    @click="activeTab = 'secondCategory'"
+                >
+                  <v-icon color="black" v-if="smallSizeWindow">arrow_back</v-icon>
+                  {{secondCategoryName}}
+                </h2>
                 <div v-bar class="category-second">
                   <v-list>
-                    <v-list-tile @click="getSecondCategory(item.id, item.name, '', 'thirdCategory')" v-for="item in thirdCategoryData">
+                    <v-list-tile @click="getSecondCategory(item.id, item.name, '', 'thirdCategory')"
+                                 v-for="item in thirdCategoryData"
+                                 :key="`categoryModal${item.id}`"
+                    >
                       <v-list-tile-content>
                         <v-list-tile-title>
                           {{item.name}}
@@ -123,7 +145,11 @@
         secondCategory: false,
         firstCategoryActive: '',
         secondCategoryActive: '',
-        name: {},
+        firstCategoryName: '',
+        secondCategoryName: '',
+        thirdCategoryName: '',
+        activeTab: 'firstCategory',
+        smallSizeWindow: false,
         nameStr: '',
         categoryDone: false
       }
@@ -132,11 +158,15 @@
       getSecondCategory(id, name, category, categoryThis) {
         this.firstCategory = false;
         this.secondCategory = true;
-        this.name[categoryThis] = name;
+        this[`${categoryThis}Name`] = name;
+        this.activeTab = category;
+        if (categoryThis === 'firstCategory') {
+          this.thirdCategoryData = [];
+        }
         store.dispatch('category/CATEGORY', {parent: id})
           .then(res => {
             if (res.body.length > 0) {
-              this[category] = res.body;
+              this[`${category}Data`] = res.body;
               this[`${categoryThis}Active`] = id;
             }
             else {
@@ -150,14 +180,11 @@
         this.secondCategory = false;
         this.categoryDone = true;
         this.dialog = false;
-        this.nameStr = '';
-        for (let key in this.name) {
-          if (key !== 'firstCategory') {
-            this.nameStr += ' - ';
-          }
-          this.nameStr += this.name[key];
+        this.nameStr = this.firstCategoryName + ' - ' + this.secondCategoryName;
+        if (this.thirdCategoryName !== '') {
+          this.nameStr += ' - ' + this.thirdCategoryName;
         }
-        this.name = {};
+        this.thirdCategoryName = '';
         store.dispatch('category/ADD_FIELD', {id: id})
           .then(res => {
             this.$emit('addFields', res.body, 'category');
@@ -170,6 +197,9 @@
       }
     },
     created() {
+      if (window.innerWidth < 920) {
+        this.smallSizeWindow = true;
+      }
       store.dispatch('category/CATEGORY', {parent: 0})
         .then(res => {
           this.category = res.body;
