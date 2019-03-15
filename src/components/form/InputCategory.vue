@@ -1,29 +1,31 @@
 <template>
   <v-layout row wrap>
-    <v-flex md8 xs12 class="text-xs-center">
+    <v-flex md8 xs12 class="text-xs-center category-wrap">
       <v-dialog
           v-model="dialog"
           width="850"
       >
         <template v-slot:activator="{ on }">
-            <v-btn
-                v-if="!categoryDone"
-                flat
-                :class="error === undefined ? 'blue--text' : 'red--text'"
-                v-on="on"
-                @click="open = true"
-            >
-              {{data.label}}
-            </v-btn>
-            <v-btn
-                v-else
-                :class="error === undefined ? 'blue--text' : 'red--text'"
-                v-on="on"
-                @click="open = true"
-            >
-              Изменить категорию
-            </v-btn>
-            <div class="text-xs-center" v-if="categoryDone">{{nameStr}}</div>
+            <div>
+              <v-btn
+                  v-if="!categoryDone"
+                  flat
+                  :class="error === undefined ? 'blue--text' : 'red--text'"
+                  v-on="on"
+                  @click="open = true"
+              >
+                {{data.label}}
+              </v-btn>
+              <v-btn
+                  v-else
+                  :class="error === undefined ? 'blue--text' : 'red--text'"
+                  v-on="on"
+                  @click="open = true"
+              >
+                Изменить категорию
+              </v-btn>
+              <div class="text-xs-center" v-if="categoryDone">{{name}}</div>
+            </div>
         </template>
         <v-card>
           <v-card-title
@@ -150,7 +152,7 @@
         thirdCategoryName: '',
         activeTab: 'firstCategory',
         smallSizeWindow: false,
-        nameStr: '',
+        name: '',
         categoryDone: false
       }
     },
@@ -178,25 +180,31 @@
         this.newValue = id;
         this.firstCategory = true;
         this.secondCategory = false;
-        this.categoryDone = true;
         this.dialog = false;
-        this.nameStr = this.firstCategoryName + ' - ' + this.secondCategoryName;
-        if (this.thirdCategoryName !== '') {
-          this.nameStr += ' - ' + this.thirdCategoryName;
-        }
         this.thirdCategoryName = '';
+        this.getCategoryName(this.newValue);
         store.dispatch('category/ADD_FIELD', {id: id})
           .then(res => {
             this.$emit('addFields', res.body, 'category_id');
           });
       },
+      getCategoryName(id) {
+        store.dispatch('category/CATEGORY_NAME', {id: id})
+          .then(res => {
+            this.name = res.body.name;
+            this.categoryDone = true;
+          });
+      }
     },
     beforeUpdate() {
       if (this.open && !this.dialog) {
-        this.input(this.value);
+        this.input(this.newValue);
       }
     },
     created() {
+      if (this.newValue !== '') {
+        this.getCategoryName(this.newValue);
+      }
       if (window.innerWidth < 920) {
         this.smallSizeWindow = true;
       }
@@ -235,5 +243,8 @@
     right: 0;
     width: 5px;
     background-color: #2196F3;
+  }
+  .category-wrap {
+    margin-bottom: -21px;
   }
 </style>

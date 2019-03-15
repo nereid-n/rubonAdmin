@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import AdAdd from "./views/AdAdd";
+import AdvertisementAdd from "./views/AdvertisementAdd";
+import Advertisement from "./views/Advertisement";
 
 Vue.use(Router);
 
@@ -16,13 +17,18 @@ export default new Router({
     {
       path: '/ad/add',
       name: 'ad-add',
-      component: AdAdd,
+      component: AdvertisementAdd,
     },
     {
       path: '/ad/update/:id',
       name: 'ad-update',
-      component: AdAdd,
+      component: AdvertisementAdd,
       meta: {action: 'UPDATE'}
+    },
+    {
+      path: '/ad/:id',
+      name: 'ad',
+      component: Advertisement
     }
   ]
 })

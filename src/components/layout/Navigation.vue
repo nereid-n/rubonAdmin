@@ -1,12 +1,13 @@
 <template>
   <v-navigation-drawer
       fixed
-      v-model="drawer"
+      :value="drawer"
       app
   >
     <v-list dense>
       <v-list-tile v-for="item in items"
                    :to="item.to"
+                   :key="item.name"
       >
         <v-list-tile-content>
           <v-list-tile-title>{{item.name}}</v-list-tile-title>
@@ -20,17 +21,27 @@
   export default {
     name: "Navigation",
     data: () => ({
-      drawer: null,
       items: [
         {
           name: 'Home',
           to: '/'
         },
       ]
-    })
+    }),
+    props: {
+      drawer: {
+        required: true,
+        default: true
+      }
+    },
+    created() {
+
+    }
   }
 </script>
 
 <style scoped>
-
+  .v-navigation-drawer {
+    z-index: 5;
+  }
 </style>

@@ -20,9 +20,15 @@
 
     <v-flex md8 xs12 v-if="newValue.length > 0">
       <draggable class="layout row wrap">
-        <v-flex md4 sm6 xs12 v-for="(file, index) in newValue">
+        <v-flex md4
+                sm6
+                xs12
+                v-for="(file, index) in newValue"
+                :key="`${data.name}${index}`"
+        >
           <v-card>
-            <v-img :src="preview(file)"/>
+            <v-img v-if="typeof file === 'string'" :src="file"/>
+            <v-img v-else :src="preview(file)"/>
 
             <v-card-title>
               {{ file.name }}
@@ -44,7 +50,7 @@
     components: {draggable},
     data() {
       return {
-        newValue: ['https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg']
+        newValue: []
       }
     },
     methods: {
@@ -62,6 +68,14 @@
         this.newValue.splice(index, 1);
         this.input(this.newValue);
       },
+    },
+    created() {
+      if (this.value !== '') {
+        this.newValue = this.value;
+      }
+      else {
+        this.newValue = [];
+      }
     },
     mixins: [inputMixin],
   }

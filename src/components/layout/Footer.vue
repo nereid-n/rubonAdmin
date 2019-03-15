@@ -11,5 +11,7 @@
 </script>
 
 <style scoped>
-
+  .v-footer--absolute, .v-footer--fixed {
+    z-index: 6;
+  }
 </style>

@@ -1,9 +1,11 @@
 <template>
   <div>
-    <Navigation/>
-    <Toolbar/>
+    <Navigation :drawer="drawer"/>
+    <Toolbar @toggleDrawer="toggleDrawer"/>
     <v-content>
-      <slot/>
+      <v-container grid-list-xl>
+        <slot/>
+      </v-container>
     </v-content>
     <Footer/>
   </div>
@@ -16,6 +18,16 @@
   export default {
     name: "MainLayout",
     components: {Toolbar, Navigation, Footer},
+    data() {
+      return {
+        drawer: true
+      }
+    },
+    methods: {
+      toggleDrawer(drawer) {
+        this.drawer = drawer;
+      }
+    }
   }
 </script>
 
