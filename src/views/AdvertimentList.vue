@@ -8,9 +8,13 @@
                   :headers="headers"
     >
       <template v-slot:items="props">
+        <td class="table-img-preview-wrap">
+          <div class="table-img-preview">
+            <img :src="props.item.img" alt="">
+          </div>
+        </td>
         <td v-html="props.item.title" class="first-td"></td>
         <td v-html="props.item.category"></td>
-        <td v-html="props.item.city"></td>
         <td v-html="props.item.price"></td>
         <td v-html="props.item.created"></td>
         <td v-html="props.item.updated"></td>
@@ -48,15 +52,15 @@
         loading: false,
         headers: [
           {
+            text: 'Изображение',
+            sortable: false
+          },
+          {
             text: 'Название',
             sortable: false,
           },
           {
             text: 'Категория',
-            sortable: false
-          },
-          {
-            text: 'Город',
             sortable: false,
           },
           {
@@ -95,10 +99,11 @@
               created = created.toLocaleDateString();
               let updated = new Date(value.dt_update * 1000);
               updated = updated.toLocaleDateString();
+              console.log(value)
               this.items.push({
+                img: value.adsImgs[0].img,
                 title: value.title,
                 category: value.categoryAds.name,
-                city: value.city.name + ' / ' + value.region.name,
                 price: value.price,
                 created: created,
                 updated: updated,
@@ -114,8 +119,26 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss">
+  .v-table {
+    min-width: 1075px;
+  }
+  .v-pagination {
+    flex-wrap: wrap;
+  }
   .last-td {
     width: 140px;
+  }
+  .table-img-preview {
+    width: 220px;
+    height: 160px;
+    &-wrap {
+      width: 220px;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 </style>
