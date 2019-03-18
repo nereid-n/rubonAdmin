@@ -26,56 +26,68 @@
     created() {
       let apiData = {
         id: this.$route.params.id,
-        data: {
-          api_key: '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e',
-          expand: 'adsImgs,adsFieldsValues'
-        }
       };
       store.dispatch('ad/AD', apiData)
         .then(res => {
+          console.log(res)
           store.dispatch('category/CATEGORY_NAME', {id: res.body.category_id})
             .then(resCategory => {
               res.body.category_id = resCategory.body.name;
-            });
-          store.dispatch('city/CITY_NAME', {id: res.body.city_id})
-            .then(resCity => {
-              res.body.city_id = resCity.body.name;
-            });
-          store.dispatch('category/ADD_FIELD', {id: res.body.category_id})
-            .then(resAddField => {
-              this.addFields(formData, resAddField.body, 'category_id');
-              for (let i = 0; i < formData.length; i++) {
-                let label = formData[i].data.label;
-                let name = formData[i].data.name;
-                let value = '';
-                if (res.body[name] !== undefined) {
-                  value = res.body[name];
-                }
-                else {
-                  if (name === 'photos') {
-                    value = '<div class="table-img-wrap">'
-                    for (let valueImg of res.body.adsImgs) {
-                      value += `<div class="table-img"><img src="${valueImg.img}"></div>`;
+              res.body.city_id = res.body.region.name + ' / ' + res.body.city.name;
+              store.dispatch('category/ADD_FIELD', {id: res.body.category_id})
+                .then(resAddField => {
+                  this.addFields(formData, resAddField.body, 'category_id');
+                  for (let i = 0; i < formData.length; i++) {
+                    let label = formData[i].data.label;
+                    let name = formData[i].data.name;
+                    let value = '';
+                    if (res.body[name] !== undefined) {
+                      value = res.body[name];
                     }
-                    value += '</div>';
-                  }
-                  else {
-                    for (let valueField of res.body.adsFieldsValues) {
-                      if (valueField.ads_fields_name === name) {
-                        value = valueField.value;
-                        break;
+                    else {
+                      if (name === 'photos') {
+                        value = '<div class="table-img-wrap">'
+                        for (let valueImg of res.body.adsImgs) {
+                          value += `<div class="table-img"><img src="${valueImg.img}"></div>`;
+                        }
+                        value += '</div>';
+                      }
+                      else {
+                        for (let valueField of res.body.adsFieldsValues) {
+                          if (valueField.ads_fields_name === name) {
+                            value = valueField.value;
+                            break;
+                          }
+                        }
                       }
                     }
+                    if (formData[i].data.name === 'agreed') {
+                      continue;
+                    }
+                    this.items.push({
+                      name: label,
+                      value: value
+                    });
                   }
-                }
-                if (formData[i].data.name === 'agreed') {
-                  continue;
-                }
-                this.items.push({
-                  name: label,
-                  value: value
+                  let created = new Date(res.body.dt_add * 1000);
+                  created = created.toLocaleString();
+                  let updated = new Date(res.body.dt_update * 1000);
+                  updated = updated.toLocaleString();
+                  this.items.push(
+                    {
+                      name: 'Добавлено',
+                      value: created
+                    },
+                    {
+                      name: 'Обновлено',
+                      value: updated
+                    },
+                    {
+                      name: 'Просмотры',
+                      value: res.body.views
+                    }
+                  );
                 });
-              }
             });
         })
     },

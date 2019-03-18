@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AdvertisementAdd from "./views/AdvertisementAdd";
 import Advertisement from "./views/Advertisement";
+import AdvertimentList from "./views/AdvertimentList";
 
 Vue.use(Router);
 
@@ -12,7 +13,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      redirect: '/ad/add'
+      redirect: '/ads'
     },
     {
       path: '/ad/add',
@@ -26,9 +27,14 @@ export default new Router({
       meta: {action: 'UPDATE'}
     },
     {
+      path: '/ads',
+      name: 'ads',
+      component: AdvertimentList
+    },
+    {
       path: '/ad/:id',
       name: 'ad',
       component: Advertisement
-    }
+    },
   ]
 })

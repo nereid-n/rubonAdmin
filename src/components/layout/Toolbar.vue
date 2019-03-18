@@ -16,6 +16,11 @@
         this.drawer = !this.drawer;
         this.$emit('toggleDrawer', this.drawer);
       }
+    },
+    created() {
+      if (window.innerWidth < 920) {
+        this.drawer = false;
+      }
     }
   }
 </script>

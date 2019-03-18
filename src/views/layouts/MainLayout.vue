@@ -27,6 +27,11 @@
       toggleDrawer(drawer) {
         this.drawer = drawer;
       }
+    },
+    created() {
+      if (window.innerWidth < 920) {
+        this.drawer = false;
+      }
     }
   }
 </script>

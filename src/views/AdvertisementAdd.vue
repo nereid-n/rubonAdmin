@@ -69,11 +69,7 @@
           });
         if (this.$route.meta.action === 'UPDATE') {
           let apiData = {
-            id: this.$route.params.id,
-            data: {
-              api_key: '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e',
-              expand: 'adsImgs,adsFieldsValues'
-            }
+            id: this.$route.params.id
           };
           store.dispatch('ad/AD', apiData)
             .then(res => {

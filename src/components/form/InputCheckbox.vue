@@ -1,7 +1,9 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12 :class="data.hint !== undefined ? 'md8' : ''">
-      <v-checkbox :label="data.label"/>
+      <v-checkbox :label="data.label"
+                  :value="value"
+      />
     </v-flex>
     <v-flex>
       <v-flex md4 xs12 v-if="data.hint !== undefined">

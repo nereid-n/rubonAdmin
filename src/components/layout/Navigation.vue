@@ -23,15 +23,14 @@
     data: () => ({
       items: [
         {
-          name: 'Home',
-          to: '/'
+          name: 'Объявления',
+          to: '/ads'
         },
       ]
     }),
     props: {
       drawer: {
-        required: true,
-        default: true
+        required: true
       }
     },
     created() {

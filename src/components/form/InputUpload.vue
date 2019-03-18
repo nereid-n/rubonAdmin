@@ -19,7 +19,25 @@
     </v-flex>
 
     <v-flex md8 xs12 v-if="newValue.length > 0">
-      <draggable class="layout row wrap">
+      <div v-if="smallSizeWindow" class="layout row wrap">
+        <v-flex md4
+                sm6
+                xs12
+                v-for="(file, index) in newValue"
+                :key="`${data.name}${index}`"
+        >
+          <v-card>
+            <v-img v-if="typeof file === 'string'" :src="file"/>
+            <v-img v-else :src="preview(file)"/>
+
+            <v-card-title>
+              {{ file.name }}
+              <v-icon class="ml-auto" @click.prevent="drop(index)">close</v-icon>
+            </v-card-title>
+          </v-card>
+        </v-flex>
+      </div>
+      <draggable v-else class="layout row wrap">
         <v-flex md4
                 sm6
                 xs12
@@ -50,7 +68,8 @@
     components: {draggable},
     data() {
       return {
-        newValue: []
+        newValue: [],
+        smallSizeWindow: false
       }
     },
     methods: {
@@ -75,6 +94,9 @@
       }
       else {
         this.newValue = [];
+      }
+      if (window.innerWidth < 920) {
+        this.smallSizeWindow = true;
       }
     },
     mixins: [inputMixin],
