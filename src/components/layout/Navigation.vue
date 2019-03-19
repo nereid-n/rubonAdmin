@@ -26,15 +26,28 @@
           name: 'Объявления',
           to: '/ads'
         },
+        {
+          name: 'Добавить объявления',
+          to: '/ad/add'
+        },
+        {
+          name: 'Профиль',
+          to: '/profile'
+        },
+        {
+          name: 'Аккаунт',
+          to: '/account'
+        },
+        {
+          name: 'Соцсети',
+          to: '/networks'
+        }
       ]
     }),
     props: {
       drawer: {
         required: true
       }
-    },
-    created() {
-
     }
   }
 </script>

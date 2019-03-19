@@ -8,4 +8,7 @@ export default {
     name: 'имя',
     phone: 'телефон',
     email: 'email',
+    cite: 'вебсайт',
+    new_password: 'новый пароль',
+    old_password: 'старый пароль'
 }

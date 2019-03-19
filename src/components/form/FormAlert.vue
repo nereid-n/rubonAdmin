@@ -1,6 +1,6 @@
 <template>
   <div class="pos-relative">
-    <v-alert :value="showHint && error === undefined"
+    <v-alert :value="showHint && error === undefined && hint !== '' && hint !== undefined"
              color="success"
              v-html="hint"
              transition="slide-x-reverse-transition"

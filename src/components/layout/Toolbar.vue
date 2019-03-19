@@ -1,7 +1,12 @@
 <template>
   <v-toolbar color="blue" dark fixed app>
     <v-toolbar-side-icon @click.stop="toggleDrawer"></v-toolbar-side-icon>
-    <v-toolbar-title>Application</v-toolbar-title>
+    <v-toolbar-title>
+      {{$route.meta.title}}
+      <template v-if="$route.meta.id">
+        {{$route.params.id}}
+      </template>
+    </v-toolbar-title>
   </v-toolbar>
 </template>
 

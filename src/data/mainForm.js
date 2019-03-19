@@ -55,6 +55,7 @@ export default [
     data: {
       name: 'photos',
       label: 'Фотографии',
+      multiple: true
     }
   },
   {

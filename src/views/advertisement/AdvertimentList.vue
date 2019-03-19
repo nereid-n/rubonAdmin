@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  import store from '../store/store';
+  import store from '../../store/store';
 
   export default {
     name: "AdvertimentList",
@@ -99,7 +99,6 @@
               created = created.toLocaleDateString();
               let updated = new Date(value.dt_update * 1000);
               updated = updated.toLocaleDateString();
-              console.log(value)
               this.items.push({
                 img: value.adsImgs[0].img,
                 title: value.title,

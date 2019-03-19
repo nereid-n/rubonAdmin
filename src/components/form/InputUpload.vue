@@ -13,7 +13,7 @@
              class="input-upload"
              @input="change"
              accept="image/*"
-             multiple
+             :multiple="data.multiple"
       >
       <v-btn class="btn-upload">Browse</v-btn>
     </v-flex>
@@ -76,7 +76,13 @@
       change(e) {
         for (let i = 0; i < e.target.files.length; i++) {
           let file = e.target.files.item(i);
-          this.newValue.push(file);
+          if (this.data.multiple) {
+            this.newValue.push(file);
+          }
+          else {
+            this.newValue = [];
+            this.newValue[0] = file;
+          }
           this.input(this.newValue);
         }
       },

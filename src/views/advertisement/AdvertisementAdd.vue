@@ -15,17 +15,17 @@
 </template>
 
 <script>
-  import dataForm from '../data/mainForm';
-  import InputText from "../components/form/InputText";
-  import InputTextarea from "../components/form/InputTextarea";
-  import InputPhone from "../components/form/InputPhone";
-  import InputCheckbox from "../components/form/InputCheckbox";
-  import InputAutocomplete from "../components/form/InputAutocomplete";
-  import InputCategory from "../components/form/InputCategory";
-  import InputUpload from "../components/form/InputUpload";
-  import InputSelect from "../components/form/InputSelect";
-  import store from '../store/store';
-  import addFieldsMixin from '../mixins/addFieldsMixin';
+  import dataForm from '../../data/mainForm';
+  import InputText from "../../components/form/InputText";
+  import InputTextarea from "../../components/form/InputTextarea";
+  import InputPhone from "../../components/form/InputPhone";
+  import InputCheckbox from "../../components/form/InputCheckbox";
+  import InputAutocomplete from "../../components/form/InputAutocomplete";
+  import InputCategory from "../../components/form/InputCategory";
+  import InputUpload from "../../components/form/InputUpload";
+  import InputSelect from "../../components/form/InputSelect";
+  import store from '../../store/store';
+  import addFieldsMixin from '../../mixins/addFieldsMixin';
 
   export default {
     name: "AdAdd",

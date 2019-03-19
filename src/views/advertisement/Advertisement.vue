@@ -11,9 +11,9 @@
 </template>
 
 <script>
-  import store from '../store/store';
-  import formData from '../data/mainForm';
-  import addFieldsMixin from '../mixins/addFieldsMixin';
+  import store from '../../store/store';
+  import formData from '../../data/mainForm';
+  import addFieldsMixin from '../../mixins/addFieldsMixin';
 
   export default {
     name: "Advertisement",
