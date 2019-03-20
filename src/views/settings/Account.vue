@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form v-if="getDataDone">
     <component v-for="input in accountData"
                :is="input.component"
                :key="input.data.name"
@@ -16,6 +16,7 @@
 <script>
   import account from '../../data/account';
   import InputText from "../../components/form/InputText";
+  import store from '../../store/store';
 
   export default {
     name: "Account",
@@ -23,11 +24,27 @@
     data() {
       return {
         accountData: {},
-        value: {}
+        value: {},
+        getDataDone: false
       }
+    },
+    methods: {
+      submit() {
+        this.$validator.validateAll();
+      },
     },
     created() {
       this.accountData = account;
+      let params = {};
+      store.dispatch('user/USER', params)
+        .then(res => {
+          for (let value of this.accountData) {
+            if (res.body[value.data.name] !== undefined) {
+              this.value[value.data.name] = res.body[value.data.name];
+            }
+          }
+          this.getDataDone = true;
+        });
     }
   }
 </script>

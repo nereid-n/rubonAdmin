@@ -110,7 +110,7 @@ export default [
     component: 'InputCheckbox',
     rules: {
       required: true,
-      is: true
+      is_not: null
     },
     data: {
       name: 'agreed',

@@ -3,6 +3,9 @@
     <v-flex xs12 :class="data.hint !== undefined ? 'md8' : ''">
       <v-checkbox :label="data.label"
                   :value="value"
+                  @focus="focus"
+                  @change="input"
+                  @blur="blur"
       />
     </v-flex>
     <v-flex>

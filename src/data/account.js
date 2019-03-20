@@ -2,6 +2,7 @@ export default [
   {
     component: 'InputText',
     rules: {
+      required: true,
       email: true
     },
     data: {
@@ -13,10 +14,11 @@ export default [
   {
     component: 'InputText',
     rules: {
+      required: true,
       max: 255
     },
     data: {
-      name: 'name',
+      name: 'username',
       label: 'Имя пользователя',
       hint: ''
     }

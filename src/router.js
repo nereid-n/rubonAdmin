@@ -34,7 +34,25 @@ export default new Router({
       path: '/ads',
       name: 'ads',
       component: AdvertimentList,
-      meta: {title: 'Список объявлений'}
+      redirect: '/ads/active',
+      children: [
+        {
+          path: 'active',
+          meta: {title: 'Активные объявления', status: 2},
+        },
+        {
+          path: 'inactive',
+          meta: {title: 'Неактивные объявления', status: 5},
+        },
+        {
+          path: 'moder',
+          meta: {title: 'Объявления на проверке', status: 1},
+        },
+        {
+          path: 'deleted',
+          meta: {title: 'Удалённые объявления', status: 3},
+        }
+      ]
     },
     {
       path: '/ad/:id',

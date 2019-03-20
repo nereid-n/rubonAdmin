@@ -16,7 +16,7 @@ export default [
       email: true
     },
     data: {
-      name: 'email',
+      name: 'public_email',
       label: 'Публичный email',
       hint: ''
     }
@@ -27,7 +27,7 @@ export default [
       url: true
     },
     data: {
-      name: 'site',
+      name: 'website',
       label: 'Вебсайт',
       hint: ''
     }

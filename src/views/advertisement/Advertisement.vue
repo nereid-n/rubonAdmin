@@ -97,7 +97,7 @@
 
 <style lang="scss">
   table.v-table thead td:not(:nth-child(1)), table.v-table tbody td:not(:nth-child(1)), table.v-table thead th:not(:nth-child(1)), table.v-table tbody th:not(:nth-child(1)), table.v-table thead td:first-child, table.v-table tbody td:first-child, table.v-table thead th:first-child, table.v-table tbody th:first-child {
-    padding: 10px 24px;
+    padding: 10px 15px;
   }
   .first-td {
     width: 200px;

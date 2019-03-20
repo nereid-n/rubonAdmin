@@ -29,7 +29,7 @@ export default {
     input(e) {
       this.newValue = e;
       this.$emit('input', this.newValue);
-    }
+    },
   },
   created() {
     this.newValue = this.value;

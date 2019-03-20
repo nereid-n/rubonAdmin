@@ -41,7 +41,15 @@
     },
     methods: {
       submit() {
-        this.$validator.validateAll();
+        this.$validator.validateAll()
+          .then(answer => {
+            if (answer) {
+              store.dispatch('ad/AD_ADD')
+                .then(res => {
+                  console.log(res);
+                });
+            }
+          });
       },
       onAddFields(fields, name) {
         this.addFields(this.dataFields, fields, name);

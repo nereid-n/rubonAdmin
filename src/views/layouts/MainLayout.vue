@@ -29,7 +29,7 @@
       }
     },
     created() {
-      if (window.innerWidth < 920) {
+      if (window.innerWidth < 1265) {
         this.drawer = false;
       }
     }

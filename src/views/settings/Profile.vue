@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form v-if="getDataDone">
     <component v-for="input in profileData"
                :is="input.component"
                :key="input.data.name"
@@ -17,6 +17,7 @@
   import profile from '../../data/profile';
   import InputText from "../../components/form/InputText";
   import InputUpload from "../../components/form/InputUpload";
+  import store from '../../store/store';
 
   export default {
     name: "Profile",
@@ -24,11 +25,38 @@
     data() {
       return {
         profileData: {},
-        value: {}
+        value: {},
+        getDataDone: false
       }
+    },
+    methods: {
+      submit() {
+        this.$validator.validateAll();
+      },
     },
     created() {
       this.profileData = profile;
+      let params = {
+        data: {
+          expand: 'profile'
+        }
+      };
+      store.dispatch('user/USER', params)
+        .then(res => {
+          for (let value of this.profileData) {
+            if (res.body.profile[value.data.name] !== undefined) {
+              if (value.data.name !== 'avatar') {
+                this.value[value.data.name] = res.body.profile[value.data.name];
+              }
+              else {
+                if (res.body.profile[value.data.name]  !== null) {
+                  this.value[value.data.name] = ['https://rub-on.ru/' + res.body.profile[value.data.name]];
+                }
+              }
+            }
+          }
+          this.getDataDone = true;
+        });
     }
   }
 </script>
