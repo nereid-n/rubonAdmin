@@ -44,7 +44,7 @@
         this.$validator.validateAll()
           .then(answer => {
             if (answer) {
-              store.dispatch('ad/AD_ADD')
+              store.dispatch(`ad/AD_${this.$route.meta.action}`)
                 .then(res => {
                   console.log(res);
                 });

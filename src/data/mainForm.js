@@ -49,9 +49,6 @@ export default [
   },
   {
     component: 'InputUpload',
-    rules: {
-      image: true
-    },
     data: {
       name: 'photos',
       label: 'Фотографии',

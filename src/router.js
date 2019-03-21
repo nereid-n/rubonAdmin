@@ -22,7 +22,7 @@ export default new Router({
       path: '/ad/add',
       name: 'ad-add',
       component: AdvertisementAdd,
-      meta: {title: 'Добавление объявления'}
+      meta: {action: 'CREATE', title: 'Добавление объявления'}
     },
     {
       path: '/ad/update/:id',
