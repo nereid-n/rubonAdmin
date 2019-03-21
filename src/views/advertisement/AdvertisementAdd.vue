@@ -44,7 +44,7 @@
         this.$validator.validateAll()
           .then(answer => {
             if (answer) {
-              store.dispatch(`ad/AD_${this.$route.meta.action}`)
+              store.dispatch(`ad/AD_${this.$route.meta.action}`, this.value)
                 .then(res => {
                   console.log(res);
                 });
@@ -69,7 +69,7 @@
               }
             }
             for (let i = 0; i < this.dataFields.length; i++) {
-              if (this.dataFields[i].data.name === 'city_id') {
+              if (this.dataFields[i].data.name === 'Ads[city_id]') {
                 this.dataFields[i].data.items = cities;
                 break;
               }
@@ -81,24 +81,31 @@
           };
           store.dispatch('ad/AD', apiData)
             .then(res => {
-              this.value = res.body;
-              this.value.photos = [];
-              this.value.phone = this.value.phone.replace(/\D+/g,"");
+              for (let key in res.body) {
+                if (key !== 'adsFieldsValues' && key !== 'adsImgs') {
+                  this.value[`Ads[${key}]`] = res.body[key];
+                }
+              }
+              this.value['file[]'] = [];
+              this.value['Ads[phone]'] = this.value['Ads[phone]'].replace(/\D+/g,"");
               this.getDataDone = true;
-              for (let value of this.value.adsFieldsValues) {
+              for (let value of res.body.adsFieldsValues) {
                 if (value.value_id !== null) {
-                  this.value[value.ads_fields_name] = value.value_id;
+                  this.value[`AdsField[${value.ads_fields_name}]`] = value.value_id;
                 }
                 else {
-                  this.value[value.ads_fields_name] = value.value;
+                  this.value[`AdsField[${value.ads_fields_name}]`] = value.value;
                 }
               }
-              for (let value of this.value.adsImgs) {
-                this.value.photos.push(value.img);
+              for (let value of res.body.adsImgs) {
+                this.value['file[]'].push(value.img);
               }
-              store.dispatch('category/ADD_FIELD', {id: this.value.category_id})
+              store.dispatch('category/ADD_FIELD', {id: this.value['Ads[category_id]']})
                 .then(res => {
-                  this.addFields(this.dataFields, res.body, 'category_id');
+                  for (let i = 0; i < res.body.length; i++) {
+                    res.body[i][0].name = `AdsField[${res.body[i][0].name}]`;
+                  }
+                  this.addFields(this.dataFields, res.body, 'Ads[category_id]');
                 });
             });
         }

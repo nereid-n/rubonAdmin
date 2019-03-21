@@ -6,7 +6,7 @@ export default [
       email: true
     },
     data: {
-      name: 'email',
+      name: 'settings-form[email]',
       label: 'Email',
       hint: ''
     }
@@ -18,7 +18,7 @@ export default [
       max: 255
     },
     data: {
-      name: 'username',
+      name: 'settings-form[username]',
       label: 'Имя пользователя',
       hint: ''
     }
@@ -29,7 +29,7 @@ export default [
       max: 255
     },
     data: {
-      name: 'new_password',
+      name: 'settings-form[new_password]',
       label: 'Новый пароль',
       hint: '',
       type: 'password'
@@ -41,7 +41,7 @@ export default [
       max: 255
     },
     data: {
-      name: 'old_password',
+      name: 'settings-form[old_password]',
       label: 'Старый пароль',
       hint: '',
       type: 'password'

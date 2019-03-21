@@ -31,7 +31,15 @@
     },
     methods: {
       submit() {
-        this.$validator.validateAll();
+        this.$validator.validateAll()
+          .then(answer => {
+            if (answer) {
+              store.dispatch('user/USER_UPDATE', this.value)
+                .then(res => {
+                  console.log(res);
+                });
+            }
+          });
       },
     },
     created() {
@@ -43,15 +51,13 @@
       };
       store.dispatch('user/USER', params)
         .then(res => {
-          for (let value of this.profileData) {
-            if (res.body.profile[value.data.name] !== undefined) {
-              if (value.data.name !== 'avatar') {
-                this.value[value.data.name] = res.body.profile[value.data.name];
-              }
-              else {
-                if (res.body.profile[value.data.name]  !== null) {
-                  this.value[value.data.name] = ['https://rub-on.ru/' + res.body.profile[value.data.name]];
-                }
+          for (let key in res.body.profile) {
+            if (key !== 'avatar') {
+              this.value[`Profile[${key}]`] = res.body.profile[key];
+            }
+            else {
+              if (res.body.profile[key]  !== null) {
+                this.value[`Profile[${key}]`] = ['https://rub-on.ru/' + res.body.profile[key]];
               }
             }
           }

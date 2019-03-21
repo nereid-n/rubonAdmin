@@ -69,25 +69,27 @@
     data() {
       return {
         newValue: [],
-        smallSizeWindow: false
+        smallSizeWindow: false,
       }
     },
     methods: {
       change(e) {
         for (let i = 0; i < e.target.files.length; i++) {
           let file = e.target.files.item(i);
+          let formData = new FormData();
+          formData.append('file', file);
           if (this.data.multiple) {
-            this.newValue.push(file);
+            this.newValue.push(formData);
           }
           else {
             this.newValue = [];
-            this.newValue[0] = file;
+            this.newValue[0] = formData;
           }
           this.input(this.newValue);
         }
       },
       preview(file) {
-        return URL.createObjectURL(file)
+        return URL.createObjectURL(file.get('file'))
       },
       drop(index) {
         this.newValue.splice(index, 1);

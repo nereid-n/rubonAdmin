@@ -7,7 +7,7 @@
           @focus="focus"
           @input="input"
           @blur="blur"
-          :type="data.type || ''"
+          :type="data.type || 'text'"
       >
         <template v-slot:label>
           <span v-html="data.label"></span>

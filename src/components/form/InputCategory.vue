@@ -185,7 +185,10 @@
         this.getCategoryName(this.newValue);
         store.dispatch('category/ADD_FIELD', {id: id})
           .then(res => {
-            this.$emit('addFields', res.body, 'category_id');
+            for (let i = 0; i < res.body.length; i++) {
+              res.body[i][0].name = `AdsField[${res.body[i][0].name}]`;
+            }
+            this.$emit('addFields', res.body, 'Ads[category_id]');
           });
       },
       getCategoryName(id) {

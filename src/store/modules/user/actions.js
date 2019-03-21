@@ -18,4 +18,16 @@ export default {
       )
       .catch(err => console.error(`catch, ${err}`));
   },
+  'USER_UPDATE': async (context, params) => {
+    return await Vue.http.post('http://rubon.loc/api/users/update', params)
+      .then(
+        res => {
+          return res;
+        },
+        err => {
+          return err;
+        }
+      )
+      .catch(err => console.error(`catch, ${err}`));
+  },
 };

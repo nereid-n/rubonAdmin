@@ -6,7 +6,7 @@ export default [
       max: 255
     },
     data: {
-      name: 'title',
+      name: 'Ads[title]',
       label: 'Заголовок',
       hint: '<b>Введите наименование товара, объекта или услуги.</b><br>В заголовке <b>не допускается: номер телефона, электронный адрес, ссылки</b><br>Не допускаются заглавные буквы (кроме аббревиатур).'
     }
@@ -18,7 +18,7 @@ export default [
       max: 1000
     },
     data: {
-      name: 'category_id',
+      name: 'Ads[category_id]',
       label: 'Категория',
       hint: ''
     }
@@ -30,7 +30,7 @@ export default [
       max: 1000
     },
     data: {
-      name: 'content',
+      name: 'Ads[content]',
       label: 'Описание',
       hint: '<b>Добавьте описание вашего товара/услуги,</b> укажите преимущества и важные детали.<br>В описании <b>не допускается указание контактных данных.</b><br>Описание должно соответствовать заголовку и предлагаемому товару/услуге.<br>Не допускаются заглавные буквы (кроме аббревиатур).'
     }
@@ -42,7 +42,7 @@ export default [
       numeric: true
     },
     data: {
-      name: 'price',
+      name: 'Ads[price]',
       label: 'Цена',
       hint: 'Пожалуйста, укажите цену. <b>Обратите внимание, что указание нереальной или условной цены (1 руб., 111 руб.) запрещено.</b></br><b>Внимание, цена указывается в российских рублях</b>'
     }
@@ -50,7 +50,7 @@ export default [
   {
     component: 'InputUpload',
     data: {
-      name: 'photos',
+      name: 'file[]',
       label: 'Фотографии',
       multiple: true
     }
@@ -61,7 +61,7 @@ export default [
       required: true
     },
     data: {
-      name: 'city_id',
+      name: 'Ads[city_id]',
       label: 'Город',
       hint: 'Выберите город из списка',
       items: []
@@ -74,7 +74,7 @@ export default [
       alpha: true
     },
     data: {
-      name: 'name',
+      name: 'Ads[name]',
       label: 'Имя',
       hint: 'Как к Вам обращаться?'
     }
@@ -86,7 +86,7 @@ export default [
       min: 12
     },
     data: {
-      name: 'phone',
+      name: 'Ads[phone]',
       label: 'Телефон',
       hint: 'Как с Вами связаться?'
     }
@@ -98,7 +98,7 @@ export default [
       email: true
     },
     data: {
-      name: 'email',
+      name: 'Ads[email]',
       label: 'Email',
       hint: 'Вы можете указать публичный емейл в личном кабинете'
     }
@@ -110,7 +110,7 @@ export default [
       is_not: null
     },
     data: {
-      name: 'agreed',
+      name: 'Ads[option2]',
       label: '* Я соглашаюсь с правилами использования сервиса, а также с передачей и обработкой моих данных на RUB-ON. Я подтверждаю своё совершеннолетие и ответственность за размещение объявления',
     }
   },

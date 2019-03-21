@@ -30,7 +30,15 @@
     },
     methods: {
       submit() {
-        this.$validator.validateAll();
+        this.$validator.validateAll()
+          .then(answer => {
+            if (answer) {
+              store.dispatch('user/USER_UPDATE', this.value)
+                .then(res => {
+                  console.log(res);
+                });
+            }
+          });
       },
     },
     created() {
@@ -38,10 +46,8 @@
       let params = {};
       store.dispatch('user/USER', params)
         .then(res => {
-          for (let value of this.accountData) {
-            if (res.body[value.data.name] !== undefined) {
-              this.value[value.data.name] = res.body[value.data.name];
-            }
+          for (let key in res.body) {
+            this.value[`settings-form[${key}]`] = res.body[key];
           }
           this.getDataDone = true;
         });

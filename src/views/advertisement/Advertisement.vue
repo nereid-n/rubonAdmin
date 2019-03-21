@@ -20,7 +20,8 @@
     data() {
       return {
         items: [],
-        dataFields: []
+        dataFields: [],
+        value: {}
       }
     },
     created() {
@@ -29,23 +30,30 @@
       };
       store.dispatch('ad/AD', apiData)
         .then(res => {
-          console.log(res)
-          store.dispatch('category/CATEGORY_NAME', {id: res.body.category_id})
+          for (let key in res.body) {
+            if (key !== 'adsFieldsValues' && key !== 'adsImgs') {
+              this.value[`Ads[${key}]`] = res.body[key];
+            }
+          }
+          store.dispatch('category/CATEGORY_NAME', {id: this.value['Ads[category_id]']})
             .then(resCategory => {
-              res.body.category_id = resCategory.body.name;
-              res.body.city_id = res.body.region.name + ' / ' + res.body.city.name;
+              this.value[`Ads[category_id]`] = resCategory.body.name;
+              this.value[`Ads[city_id]`] = res.body.region.name + ' / ' + res.body.city.name;
               store.dispatch('category/ADD_FIELD', {id: res.body.category_id})
                 .then(resAddField => {
-                  this.addFields(formData, resAddField.body, 'category_id');
+                  for (let i = 0; i < resAddField.body.length; i++) {
+                    resAddField.body[i][0].name = `AdsField[${resAddField.body[i][0].name}]`;
+                  }
+                  this.addFields(formData, resAddField.body, 'Ads[category_id]');
                   for (let i = 0; i < formData.length; i++) {
                     let label = formData[i].data.label;
                     let name = formData[i].data.name;
                     let value = '';
-                    if (res.body[name] !== undefined) {
-                      value = res.body[name];
+                    if (this.value[name] !== undefined) {
+                      value = this.value[name];
                     }
                     else {
-                      if (name === 'photos') {
+                      if (name === 'file[]') {
                         value = '<div class="table-img-wrap">'
                         for (let valueImg of res.body.adsImgs) {
                           value += `<div class="table-img"><img src="${valueImg.img}"></div>`;
@@ -54,14 +62,14 @@
                       }
                       else {
                         for (let valueField of res.body.adsFieldsValues) {
-                          if (valueField.ads_fields_name === name) {
+                          if (`AdsField[${valueField.ads_fields_name}]` === name) {
                             value = valueField.value;
                             break;
                           }
                         }
                       }
                     }
-                    if (formData[i].data.name === 'agreed') {
+                    if (formData[i].data.name === 'Ads[option2]') {
                       continue;
                     }
                     this.items.push({
