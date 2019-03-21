@@ -1,10 +1,23 @@
 <template>
   <div>
-    <v-btn color="blue white--text" to="/ad/add">Добавить объявление</v-btn>
+    <v-btn color="blue white--text" class="ml-0" to="/ad/add">Добавить объявление</v-btn>
     <div>
-      <v-btn v-for="btn in links"
+      <v-select
+          class="d-inline-block"
+          label="Категория"
+          :items="categories"
+          item-text="value"
+          item-value="id"
+          v-model="categoryValue"
+          @change="categoryFilter"
+      >
+      </v-select>
+    </div>
+    <div>
+      <v-btn v-for="(btn, index) in links"
              depressed
              :to="btn.to"
+             :class="{'ml-0': index === 0}"
       >
         {{btn.name}}
       </v-btn>
@@ -144,10 +157,15 @@
             name: 'Удалённые',
             to: '/ads/deleted'
           },
-        ]
+        ],
+        categories: [],
+        categoryValue: ''
       }
     },
     methods: {
+      categoryFilter(e) {
+        console.log(e)
+      },
       toggleAll() {
         for (let value of this.items) {
           value.selected = this.selectAll;
@@ -199,6 +217,15 @@
     },
     created() {
       this.getDataApi();
+      store.dispatch('category/CATEGORY', {parent: 0})
+        .then(res => {
+          for (let value of res.body) {
+            this.categories.push({
+              value: value.name,
+              id: value.id
+            });
+          }
+        });
     },
     beforeRouteUpdate(to, from, next) {
       next();
