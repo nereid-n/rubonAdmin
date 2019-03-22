@@ -1,3 +1,3 @@
 module.exports = {
-  assetsDir: 'vue/dist/assets/'
+  assetsDir: 'vue/dist/'
 };
