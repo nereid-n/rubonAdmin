@@ -113,9 +113,9 @@
             });
         }
         else {
-          setTimeout(() => {
+          this.$nextTick(function () {
             this.getDataDone = true;
-          }, 10);
+          })
         }
       }
     },
