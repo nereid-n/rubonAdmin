@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn color="blue white--text" class="ml-0" to="/ad/add">Добавить объявление</v-btn>
+    <v-btn color="blue white--text" class="ml-0" to="/cabinet/ad/add">Добавить объявление</v-btn>
     <div>
       <v-select
           class="d-inline-block"
@@ -18,6 +18,7 @@
              depressed
              :to="btn.to"
              :class="{'ml-0': index === 0}"
+             :key="btn.name"
       >
         {{btn.name}}
       </v-btn>
@@ -143,19 +144,19 @@
         links: [
           {
             name: 'Активные',
-            to: '/ads/active'
+            to: '/cabinet/ads/active'
           },
           {
             name: 'Неактивные',
-            to: '/ads/inactive'
+            to: '/cabinet/ads/inactive'
           },
           {
             name: 'На проверке',
-            to: '/ads/moder'
+            to: '/cabinet/ads/moder'
           },
           {
             name: 'Удалённые',
-            to: '/ads/deleted'
+            to: '/cabinet/ads/deleted'
           },
         ],
         categories: [],

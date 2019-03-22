@@ -16,25 +16,25 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      redirect: '/ads'
+      redirect: '/cabinet/ads'
     },
     {
-      path: '/ad/add',
+      path: '/cabinet/ad/add',
       name: 'ad-add',
       component: AdvertisementAdd,
       meta: {action: 'CREATE', title: 'Добавление объявления'}
     },
     {
-      path: '/ad/update/:id',
+      path: '/cabinet/ad/update/:id',
       name: 'ad-update',
       component: AdvertisementAdd,
       meta: {action: 'UPDATE', title: 'Редактирование объявления ', id: true},
     },
     {
-      path: '/ads',
+      path: '/cabinet/ads',
       name: 'ads',
       component: AdvertimentList,
-      redirect: '/ads/active',
+      redirect: 'cabinet/ads/active',
       children: [
         {
           path: 'active',
@@ -55,25 +55,25 @@ export default new Router({
       ]
     },
     {
-      path: '/ad/:id',
+      path: '/cabinet/ad/:id',
       name: 'ad',
       component: Advertisement,
       meta: {title: 'Просмотри объявления ', id: true}
     },
     {
-      path: '/profile',
+      path: '/cabinet/profile',
       name: 'profile',
       component: Profile,
       meta: {title: 'Профиль'}
     },
     {
-      path: '/account',
+      path: '/cabinet/account',
       name: 'account',
       component: Account,
       meta: {title: 'Аккаунт'}
     },
     {
-      path: '/networks',
+      path: '/cabinet/networks',
       name: 'networks',
       component: Networks,
       meta: {title: 'Соцсети'}

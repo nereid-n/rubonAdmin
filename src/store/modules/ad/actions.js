@@ -35,7 +35,7 @@ export default {
       .catch(err => console.error(`catch, ${err}`));
   },
   'AD_CREATE': async (context, params) => {
-    return await Vue.http.post('http://rubon.loc/api/ads/create', params)
+    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/create`, params)
       .then(
         res => {
           return res;
@@ -47,7 +47,7 @@ export default {
       .catch(err => console.error(`catch, ${err}`));
   },
   'AD_UPDATE': async (context, params) => {
-    return await Vue.http.post('http://rubon.loc/api/ads/update', params)
+    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/update`, params)
       .then(
         res => {
           return res;

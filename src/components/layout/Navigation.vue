@@ -24,23 +24,23 @@
       items: [
         {
           name: 'Объявления',
-          to: '/ads'
+          to: '/cabinet/ads'
         },
         {
           name: 'Добавить объявление',
-          to: '/ad/add'
+          to: '/cabinet/ad/add'
         },
         {
           name: 'Профиль',
-          to: '/profile'
+          to: '/cabinet/profile'
         },
         {
           name: 'Аккаунт',
-          to: '/account'
+          to: '/cabinet/account'
         },
         {
           name: 'Соцсети',
-          to: '/networks'
+          to: '/cabinet/networks'
         }
       ]
     }),

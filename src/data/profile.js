@@ -5,7 +5,7 @@ export default [
       max: 255
     },
     data: {
-      fullName: 'Profile[name]',
+      name: 'Profile[name]',
       label: 'Имя',
       hint: ''
     }
@@ -16,7 +16,7 @@ export default [
       email: true
     },
     data: {
-      fullName: 'Profile[public_email]',
+      name: 'Profile[public_email]',
       label: 'Публичный email',
       hint: ''
     }
@@ -27,7 +27,7 @@ export default [
       url: true
     },
     data: {
-      fullName: 'Profile[website]',
+      name: 'Profile[website]',
       label: 'Вебсайт',
       hint: ''
     }
@@ -38,7 +38,7 @@ export default [
       image: true
     },
     data: {
-      fullName: 'Profile[avatar]',
+      name: 'Profile[avatar]',
       label: 'Аватар',
       multiple: false
     }
