@@ -11,16 +11,18 @@
     />
     <v-btn color="info" class="ma-0" @click.prevent="submit">Сохранить</v-btn>
   </v-form>
+  <Loader v-else/>
 </template>
 
 <script>
   import account from '../../data/account';
   import InputText from "../../components/form/InputText";
   import store from '../../store/store';
+  import Loader from "../../components/Loader";
 
   export default {
     name: "Account",
-    components: {InputText},
+    components: {Loader, InputText},
     data() {
       return {
         accountData: {},

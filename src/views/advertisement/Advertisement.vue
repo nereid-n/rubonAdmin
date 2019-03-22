@@ -1,5 +1,6 @@
 <template>
-  <v-data-table hide-actions
+  <v-data-table v-if="load"
+                hide-actions
                 hide-headers
                 :items="items"
   >
@@ -8,17 +9,21 @@
       <td v-html="props.item.value"></td>
     </template>
   </v-data-table>
+  <Loader v-else/>
 </template>
 
 <script>
   import store from '../../store/store';
   import formData from '../../data/mainForm';
   import addFieldsMixin from '../../mixins/addFieldsMixin';
+  import Loader from "../../components/Loader";
 
   export default {
     name: "Advertisement",
+    components: {Loader},
     data() {
       return {
+        load: false,
         items: [],
         dataFields: [],
         value: {}
@@ -95,6 +100,7 @@
                       value: res.body.views
                     }
                   );
+                  this.load = true;
                 });
             });
         })

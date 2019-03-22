@@ -11,6 +11,7 @@
     />
     <v-btn color="info" class="ma-0" @click.prevent="submit">Сохранить</v-btn>
   </v-form>
+  <Loader v-else/>
 </template>
 
 <script>
@@ -18,10 +19,11 @@
   import InputText from "../../components/form/InputText";
   import InputUpload from "../../components/form/InputUpload";
   import store from '../../store/store';
+  import Loader from "../../components/Loader";
 
   export default {
     name: "Profile",
-    components: {InputUpload, InputText},
+    components: {Loader, InputUpload, InputText},
     data() {
       return {
         profileData: {},

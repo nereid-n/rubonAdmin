@@ -12,6 +12,7 @@
     />
     <v-btn color="info" class="ma-0" @click.prevent="submit">Сохранить</v-btn>
   </v-form>
+  <Loader v-else/>
 </template>
 
 <script>
@@ -26,10 +27,12 @@
   import InputSelect from "../../components/form/InputSelect";
   import store from '../../store/store';
   import addFieldsMixin from '../../mixins/addFieldsMixin';
+  import Loader from "../../components/Loader";
 
   export default {
     name: "AdAdd",
     components: {
+      Loader,
       InputSelect,
       InputUpload, InputCategory, InputAutocomplete, InputCheckbox, InputPhone, InputTextarea, InputText},
     data() {

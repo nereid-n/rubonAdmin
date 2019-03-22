@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="load">
     <v-btn color="blue white--text" class="ml-0" to="/cabinet/ad/add">Добавить объявление</v-btn>
     <div>
       <v-select
@@ -74,10 +74,10 @@
         </td>
         <td>
           <div class="last-td">
-            <v-btn :to="`/ad/update/${props.item.id}`" flat icon color="blue" class="ma-0">
+            <v-btn :to="`/cabinet/ad/update/${props.item.id}`" flat icon color="blue" class="ma-0">
               <v-icon>edit</v-icon>
             </v-btn>
-            <v-btn :to="`/ad/${props.item.id}`" flat icon color="blue" class="ma-0">
+            <v-btn :to="`/cabinet/ad/${props.item.id}`" flat icon color="blue" class="ma-0">
               <v-icon>visibility</v-icon>
             </v-btn>
           </div>
@@ -93,15 +93,19 @@
       </v-pagination>
     </div>
   </div>
+  <Loader v-else/>
 </template>
 
 <script>
   import store from '../../store/store';
+  import Loader from "../../components/Loader";
 
   export default {
     name: "AdvertimentList",
+    components: {Loader},
     data() {
       return {
+        load: false,
         selectAll: false,
         items: [],
         totalPages: 1,
@@ -213,6 +217,7 @@
                 });
               }
             }
+            this.load = true;
           })
       }
     },

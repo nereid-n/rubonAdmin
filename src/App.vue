@@ -13,8 +13,13 @@ export default {
   computed: {
     layout() {
       return (this.$route.meta.layout || 'main') + '-layout'
-    },
-  }
+    }
+  },
+  metaInfo() {
+    return {
+      title: this.$route.meta.title
+    }
+  },
 }
 </script>
 
