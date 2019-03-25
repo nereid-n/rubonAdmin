@@ -35,11 +35,7 @@ export default {
       .catch(err => console.error(`catch, ${err}`));
   },
   'AD_CREATE': async (context, params) => {
-    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/create`, params, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    })
+    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/create`, params)
       .then(
         res => {
           return res;
