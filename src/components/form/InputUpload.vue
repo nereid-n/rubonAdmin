@@ -76,20 +76,23 @@
       change(e) {
         for (let i = 0; i < e.target.files.length; i++) {
           let file = e.target.files.item(i);
-          let formData = new FormData();
-          formData.append('file', file);
+          // let formData = new FormData();
+          // formData.append('file', file);
           if (this.data.multiple) {
-            this.newValue.push(formData);
+            // this.newValue.push(formData);
+            this.newValue.push(file);
           }
           else {
             this.newValue = [];
-            this.newValue[0] = formData;
+            // this.newValue[0] = formData;
+            this.newValue[0] = file;
           }
           this.input(this.newValue);
         }
       },
       preview(file) {
-        return URL.createObjectURL(file.get('file'))
+        // return URL.createObjectURL(file.get('file'));
+        return URL.createObjectURL(file);
       },
       drop(index) {
         this.newValue.splice(index, 1);

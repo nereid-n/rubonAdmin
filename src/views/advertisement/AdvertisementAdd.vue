@@ -14,7 +14,6 @@
   </v-form>
   <Loader v-else/>
 </template>
-
 <script>
   import dataForm from '../../data/mainForm';
   import InputText from "../../components/form/InputText";
@@ -47,7 +46,18 @@
         this.$validator.validateAll()
           .then(answer => {
             if (answer) {
-              store.dispatch(`ad/AD_${this.$route.meta.action}`, this.value)
+              let formData = new FormData();
+              for (let key in this.value) {
+                if (key === 'file[]') {
+                  for (let j in this.value[key]) {
+                    formData.append(`file${j}[]`, this.value[key][j]);
+                  }
+                }
+                else {
+                  formData.append(key, this.value[key]);
+                }
+              }
+              store.dispatch(`ad/AD_${this.$route.meta.action}`, formData)
                 .then(res => {
                   console.log(res);
                 });
