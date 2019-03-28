@@ -36,7 +36,11 @@ export default {
   },
   'AD_CREATE': async (context, params) => {
     params.append('api_key', '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e');
-    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/create-new`, params)
+    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/create-new`, params, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
       .then(
         res => {
           return res;
