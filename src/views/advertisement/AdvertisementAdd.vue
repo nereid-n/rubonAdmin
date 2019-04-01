@@ -10,6 +10,7 @@
                v-validate="input.rules"
                @addFields="onAddFields"
     />
+    <p v-if="error" class="red--text">Ошибка!</p>
     <v-btn color="info" class="ma-0" @click.prevent="submit">Сохранить</v-btn>
   </v-form>
   <Loader v-else/>
@@ -38,7 +39,8 @@
       return {
         value: {},
         dataFields: [],
-        getDataDone: false
+        getDataDone: false,
+        error: false
       }
     },
     methods: {
@@ -60,6 +62,12 @@
               store.dispatch(`ad/AD_${this.$route.meta.action}`, formData)
                 .then(res => {
                   console.log(res);
+                  if (res.ok) {
+                    this.$router.push({name: 'ad', params: {id: res.body.id}});
+                  }
+                  else {
+                    this.error = true;
+                  }
                 });
             }
           });
