@@ -52,7 +52,7 @@ export default {
       .catch(err => console.error(`catch, ${err}`));
   },
   'AD_UPDATE': async (context, params) => {
-    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/update`, params)
+    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/update-new`, params)
       .then(
         res => {
           return res;
