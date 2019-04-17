@@ -2,7 +2,7 @@ import Vue from "vue";
 
 export default {
   'USER': async (context, params) => {
-    params.id = 58;
+    params.id = 1;
     if(params.data === undefined) {
       params.data = {};
     }
