@@ -34,9 +34,6 @@ export default [
   },
   {
     component: 'InputUpload',
-    rules: {
-      image: true
-    },
     data: {
       name: 'Profile[avatar]',
       label: 'Аватар',
