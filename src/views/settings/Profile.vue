@@ -36,7 +36,11 @@
         this.$validator.validateAll()
           .then(answer => {
             if (answer) {
-              store.dispatch('user/USER_UPDATE', this.value)
+	      let formData = new FormData();
+              for (let key in this.value) {
+                formData.append(key, this.value[key]);
+              }
+              store.dispatch('user/USER_UPDATE', formData)
                 .then(res => {
                   console.log(res);
                 });
