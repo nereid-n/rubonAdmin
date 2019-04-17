@@ -35,7 +35,7 @@ export default [
   {
     component: 'InputUpload',
     data: {
-      name: 'Profile[avatar]',
+      name: 'avatar',
       label: 'Аватар',
       multiple: false
     }

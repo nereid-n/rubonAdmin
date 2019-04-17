@@ -63,7 +63,7 @@
             }
             else {
               if (res.body.profile[key]  !== null) {
-                this.value[`Profile[${key}]`] = ['https://rub-on.ru/' + res.body.profile[key]];
+                this.value[key] = ['https://rub-on.ru/' + res.body.profile[key]];
               }
             }
           }
