@@ -37,7 +37,12 @@
           .then(answer => {
             if (answer) {
 	            let formData = new FormData();
-              this.value.avatar = this.value.avatar[0];
+	            if (this.value.avatar.length === 0) {
+                this.value.avatar = null;
+              }
+              else {
+                this.value.avatar = this.value.avatar[0];
+              }
               for (let key in this.value) {
                 formData.append(key, this.value[key]);
               }
