@@ -98,7 +98,7 @@
         this.value = {};
         this.dataFields = [];
         this.getDataDone = false;
-        this.dataFields = dataForm;
+        Object.assign(this.dataFields, dataForm);
         store.dispatch('city/CITY_LIST')
           .then(res => {
             let cities = [];
@@ -155,6 +155,14 @@
           this.$nextTick(function () {
             this.getDataDone = true;
           })
+        }
+        if (this.$route.meta.action === 'UPDATE') {
+          for (let i = 0; i < this.dataFields.length; i++) {
+            if (this.dataFields[i].data.name === 'Ads[category_id]') {
+              this.dataFields.splice(i, 1);
+              break;
+            }
+          }
         }
       }
     },
