@@ -36,7 +36,7 @@ export default {
   },
   'AD_CREATE': async (context, params) => {
     params.append('api_key', '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e');
-    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/create-new`, params, {
+    return await Vue.http.post(`${process.env.VUE_APP_API_URL}ads/create-new`, params, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -52,7 +52,7 @@ export default {
       .catch(err => console.error(`catch, ${err}`));
   },
   'AD_UPDATE': async (context, params) => {
-    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}ads/update-new`, params)
+    return await Vue.http.post(`${process.env.VUE_APP_API_URL}ads/update-new`, params)
       .then(
         res => {
           return res;

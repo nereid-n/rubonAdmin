@@ -19,7 +19,7 @@ export default {
       .catch(err => console.error(`catch, ${err}`));
   },
   'USER_UPDATE': async (context, params) => {
-    return await Vue.http.post(`${process.env.VUE_APP_API_TEST_URL}users/pfupdate`, params)
+    return await Vue.http.post(`${process.env.VUE_APP_API_URL}users/pfupdate`, params)
       .then(
         res => {
           return res;
