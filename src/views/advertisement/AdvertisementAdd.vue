@@ -55,7 +55,11 @@
                 if (key === 'file[]') {
                   for (let j in this.value[key]) {
                     if (typeof this.value[key][j] === 'string') {
-                      pictures.push(this.value[key][j]);
+                      for (let imgIndex = 0; imgIndex < this.value.images.length; imgIndex++) {
+                        if (this.value.images[imgIndex].img === this.value[key][j]) {
+                          pictures.push(this.value.images[imgIndex]);
+                        }
+                      }
                     }
                     else {
                       formData.append('files' + fileIndex, this.value[key][j]);
@@ -73,6 +77,7 @@
               else {
                 formData.append('pictures', null);
               }
+              formData.delete('images');
               store.dispatch(`ad/AD_${this.$route.meta.action}`, formData)
                 .then(res => {
                   console.log(res);
@@ -122,6 +127,7 @@
                 }
               }
               this.value['file[]'] = [];
+              this.value.images = [];
               this.value['Ads[phone]'] = this.value['Ads[phone]'].replace(/\D+/g,"");
               this.getDataDone = true;
               for (let value of res.body.adsFieldsValues) {
@@ -134,6 +140,7 @@
               }
               for (let value of res.body.adsImgs) {
                 this.value['file[]'].push(value.img);
+                this.value.images.push({img: value.img, img_thumb: value.img_thumb});
               }
               store.dispatch('category/ADD_FIELD', {id: this.value['Ads[category_id]']})
                 .then(res => {
