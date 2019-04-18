@@ -49,15 +49,29 @@
           .then(answer => {
             if (answer) {
               let formData = new FormData();
+              let pictures = [];
+              let fileIndex = 0;
               for (let key in this.value) {
                 if (key === 'file[]') {
                   for (let j in this.value[key]) {
-                    formData.append(`file${j}[]`, this.value[key][j]);
+                    if (typeof this.value[key][j] === 'string') {
+                      pictures.push(this.value[key][j]);
+                    }
+                    else {
+                      formData.append('files' + fileIndex, this.value[key][j]);
+                      fileIndex++;
+                    }
                   }
                 }
                 else {
                   formData.append(key, this.value[key]);
                 }
+              }
+              if (pictures.length > 0) {
+                formData.append('pictures', JSON.stringify(pictures));
+              }
+              else {
+                formData.append('pictures', null);
               }
               store.dispatch(`ad/AD_${this.$route.meta.action}`, formData)
                 .then(res => {
