@@ -1,18 +1,18 @@
 <template>
   <div v-if="load">
     <v-btn color="blue white--text" class="ml-0" to="/cabinet/ad/add">Добавить объявление</v-btn>
-    <div>
-      <v-select
-          class="d-inline-block"
-          label="Категория"
-          :items="categories"
-          item-text="value"
-          item-value="id"
-          v-model="categoryValue"
-          @change="categoryFilter"
-      >
-      </v-select>
-    </div>
+<!--    <div>-->
+<!--      <v-select-->
+<!--          class="d-inline-block"-->
+<!--          label="Категория"-->
+<!--          :items="categories"-->
+<!--          item-text="value"-->
+<!--          item-value="id"-->
+<!--          v-model="categoryValue"-->
+<!--          @change="categoryFilter"-->
+<!--      >-->
+<!--      </v-select>-->
+<!--    </div>-->
     <div>
       <v-btn v-for="(btn, index) in links"
              depressed
@@ -68,7 +68,7 @@
         <td v-html="props.item.updated"></td>
         <td>
           <template v-if="props.item.rest > 0">
-            <v-progress-linear :value="100 / 15 * props.item.rest"></v-progress-linear>
+            <v-progress-linear :value="(100 / 15) * props.item.rest"></v-progress-linear>
             <span>{{props.item.rest}} / 15</span>
           </template>
         </td>
@@ -80,6 +80,11 @@
             <v-btn :to="`/cabinet/ad/${props.item.id}`" flat icon color="blue" class="ma-0">
               <v-icon>visibility</v-icon>
             </v-btn>
+            <template v-if="props.item.status === 2 || props.item.status === 5">
+              <v-btn @click="updateAdvertisement(props.item.id)" flat icon color="blue" class="ma-0">
+                <v-icon>arrow_upward</v-icon>
+              </v-btn>
+            </template>
           </div>
         </td>
       </template>
@@ -164,7 +169,8 @@
           },
         ],
         categories: [],
-        categoryValue: ''
+        categoryValue: '',
+        routeStatus: ''
       }
     },
     methods: {
@@ -188,6 +194,7 @@
         };
         store.dispatch('ad/AD_LIST', params)
           .then(res => {
+            console.log(res);
             this.items = [];
             this.totalPages = 1;
             this.totalPages = res.body._meta.pageCount;
@@ -197,9 +204,7 @@
                 let created = value.dt_add.toLocaleDateString();
                 value.dt_update = new Date(value.dt_update * 1000);
                 let updated = value.dt_update.toLocaleDateString();
-                let today = new Date();
-                let end = new Date(value.dt_update.getTime() + 24 * 3600000 * 15);
-                let rest = Math.ceil((end.getTime() - today.getTime()) / (24 * 3600000));
+                let rest = 15 - value.days;
                 let img = '';
                 if (value.adsImgs.length > 0) {
                   img = value.adsImgs[0].img;
@@ -213,16 +218,57 @@
                   updated: updated,
                   rest: rest,
                   id: value.id,
-                  selected: false
+                  selected: false,
+                  status: value.status,
                 });
               }
             }
             this.load = true;
           })
+      },
+      updateAdvertisement(itemId) {
+        let params = {
+          id: itemId
+        };
+        // console.log(params);
+        let index = this.items.findIndex(function (element) {
+          return element.id == itemId;
+        });
+        console.log(index);
+        store.dispatch('ad/AD_UPDATE_AD', params)
+          .then(res => {
+            this.items.splice(index, 1);
+            console.log(res);
+            if(this.$route.meta.status === 2) {
+              res.body.dt_add = new Date(res.body.dt_add * 1000);
+              let created = res.body.dt_add.toLocaleDateString();
+              res.body.dt_update = new Date(res.body.dt_update * 1000);
+              let updated = res.body.dt_update.toLocaleDateString();
+              let rest = 15 - res.body.days;
+              let img = '';
+              if (res.body.adsImgs.length > 0) {
+                img = res.body.adsImgs[0].img;
+              }
+              this.items.unshift({
+                img: img,
+                title: res.body.title,
+                category: res.body.categoryAds.name,
+                price: res.body.price,
+                created: created,
+                updated: updated,
+                rest: rest,
+                id: res.body.id,
+                selected: false,
+                status: res.body.status,
+              });
+            }
+
+          });
       }
     },
     created() {
       this.getDataApi();
+      this.routeStatus = this.$route.meta.status;
       store.dispatch('category/CATEGORY', {parent: 0})
         .then(res => {
           for (let value of res.body) {

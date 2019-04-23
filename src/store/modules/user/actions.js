@@ -30,4 +30,16 @@ export default {
       )
       .catch(err => console.error(`catch, ${err}`));
   },
+  'AC_UPDATE': async (context, params) => {
+    return await Vue.http.post(`${process.env.VUE_APP_API_URL}users/acupdate`, params)
+      .then(
+        res => {
+          return res;
+        },
+        err => {
+          return err;
+        }
+      )
+      .catch(err => console.error(`catch, ${err}`));
+  },
 };

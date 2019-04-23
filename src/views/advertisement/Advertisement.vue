@@ -14,7 +14,7 @@
 
 <script>
   import store from '../../store/store';
-  import formData from '../../data/mainForm';
+  import formData from '../../data/mainFormCreate';
   import addFieldsMixin from '../../mixins/addFieldsMixin';
   import Loader from "../../components/Loader";
 

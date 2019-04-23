@@ -35,7 +35,7 @@
         this.$validator.validateAll()
           .then(answer => {
             if (answer) {
-              store.dispatch('user/USER_UPDATE', this.value)
+              store.dispatch('user/AC_UPDATE', this.value)
                 .then(res => {
                   console.log(res);
                 });

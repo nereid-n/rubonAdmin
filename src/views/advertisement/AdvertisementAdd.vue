@@ -16,7 +16,8 @@
   <Loader v-else/>
 </template>
 <script>
-  import dataForm from '../../data/mainForm';
+  import dataFormCreate from '../../data/mainFormCreate';
+  import dataFormUpdate from '../../data/mainFormUpdate';
   import InputText from "../../components/form/InputText";
   import InputTextarea from "../../components/form/InputTextarea";
   import InputPhone from "../../components/form/InputPhone";
@@ -98,7 +99,11 @@
         this.value = {};
         this.dataFields = [];
         this.getDataDone = false;
-        Object.assign(this.dataFields, dataForm);
+        if (this.$route.meta.action === 'UPDATE') {
+          Object.assign(this.dataFields, dataFormUpdate);
+        } else {
+          Object.assign(this.dataFields, dataFormCreate);
+        }
         store.dispatch('city/CITY_LIST')
           .then(res => {
             let cities = [];
