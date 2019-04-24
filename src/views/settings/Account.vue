@@ -46,7 +46,7 @@
     created() {
       this.accountData = account;
       let params = {};
-      store.dispatch('user/USER', params)
+      store.dispatch('user/USER_ME', params)
         .then(res => {
           for (let key in res.body) {
             this.value[`settings-form[${key}]`] = res.body[key];

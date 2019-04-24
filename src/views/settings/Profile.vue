@@ -73,7 +73,7 @@
           expand: 'profile'
         }
       };
-      store.dispatch('user/USER', params)
+      store.dispatch('user/USER_ME', params)
         .then(res => {
           for (let key in res.body.profile) {
             if (key !== 'avatar') {

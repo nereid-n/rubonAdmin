@@ -1,7 +1,7 @@
 import getters from './getters';
 import actions from './actions';
 import mutations from './mutations';
-const state = {};
+let state = {};
 export default {
   state,
   getters,

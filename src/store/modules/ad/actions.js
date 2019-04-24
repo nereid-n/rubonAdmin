@@ -18,9 +18,25 @@ export default {
       )
       .catch(err => console.error(`catch, ${err}`));
   },
+  'AD_UPDATE_LIST': async (context, params) => {
+    if(params.data === undefined) {
+      params.data = {};
+    }
+    params.data.api_key = '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e';
+    params.data.expand = 'days,adsImgs,adsFieldsValues,city,region,categoryAds';
+    return await Vue.http.get(`${process.env.VUE_APP_API_URL}items/${params.id}`, {params: params.data})
+      .then(
+        res => {
+          return res;
+        },
+        err => {
+          return err;
+        }
+      )
+      .catch(err => console.error(`catch, ${err}`));
+  },
   'AD_LIST': async (context, params) => {
     params.data.limit = 10;
-    params.data.user = 'apuc06@mail.ru';
     params.data.api_key = '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e';
     params.data.expand = 'days,adsImgs,adsFieldsValues,city,region,categoryAds';
     return await Vue.http.get(`${process.env.VUE_APP_API_URL}items/index`, {params: params.data})

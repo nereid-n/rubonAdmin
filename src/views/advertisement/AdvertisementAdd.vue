@@ -126,6 +126,7 @@
           };
           store.dispatch('ad/AD', apiData)
             .then(res => {
+              console.log(res);
               for (let key in res.body) {
                 if (key !== 'adsFieldsValues' && key !== 'adsImgs') {
                   this.value[`Ads[${key}]`] = res.body[key];
