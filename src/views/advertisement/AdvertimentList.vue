@@ -193,7 +193,6 @@
             user: this.$store.state.user.email
           }
         };
-        console.log(this.$store);
         store.dispatch('ad/AD_LIST', params)
           .then(res => {
             this.items = [];
@@ -231,11 +230,9 @@
         let params = {
           id: itemId
         };
-        // console.log(params);
         let index = this.items.findIndex(function (element) {
           return element.id == itemId;
         });
-        console.log(index);
         await store.dispatch('ad/AD_UPDATE_AD', params)
           .then(res => {
             this.items.splice(index, 1);
@@ -269,7 +266,7 @@
       }
     },
     created() {
-      this.getDataApi()
+      this.getDataApi();
       this.routeStatus = this.$route.meta.status;
       store.dispatch('category/CATEGORY', {parent: 0})
         .then(res => {

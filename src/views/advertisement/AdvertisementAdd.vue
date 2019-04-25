@@ -81,7 +81,6 @@
               formData.delete('images');
               store.dispatch(`ad/AD_${this.$route.meta.action}`, formData)
                 .then(res => {
-                  console.log(res);
                   if (res.ok) {
                     this.$router.push({name: 'ad', params: {id: res.body.id}});
                   }
@@ -126,7 +125,6 @@
           };
           store.dispatch('ad/AD', apiData)
             .then(res => {
-              console.log(res);
               for (let key in res.body) {
                 if (key !== 'adsFieldsValues' && key !== 'adsImgs') {
                   this.value[`Ads[${key}]`] = res.body[key];

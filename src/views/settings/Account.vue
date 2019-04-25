@@ -37,7 +37,6 @@
             if (answer) {
               store.dispatch('user/AC_UPDATE', this.value)
                 .then(res => {
-                  console.log(res);
                 });
             }
           });

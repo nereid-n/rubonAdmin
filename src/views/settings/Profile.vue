@@ -60,7 +60,6 @@
                   if (res.ok) {
                     this.dialog = true;
                   }
-                  console.log(res);
                 });
             }
           });
@@ -75,7 +74,6 @@
       };
       store.dispatch('user/USER_ME', params)
         .then(res => {
-          console.log(res);
           for (let key in res.body.profile) {
             if (key !== 'avatar') {
               this.value[`Profile[${key}]`] = res.body.profile[key];

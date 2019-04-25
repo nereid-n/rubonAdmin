@@ -42,7 +42,7 @@
 
   export default {
     name: "MainLayout",
-    components: {Toolbar, Navigation, Footer},
+    components: {Footer},
     data() {
       return {
         drawer: true,
@@ -69,11 +69,6 @@
             to: '/cabinet/networks'
           }
         ]
-      }
-    },
-    methods: {
-      toggleDrawer(drawer) {
-        this.drawer = drawer;
       }
     },
     async beforeCreate() {
