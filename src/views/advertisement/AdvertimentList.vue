@@ -190,7 +190,7 @@
           data: {
             page: this.page,
             status: this.$route.meta.status,
-            user: this.$store.state.user.email
+            id: this.$store.state.user.id
           }
         };
         store.dispatch('ad/AD_LIST', params)
