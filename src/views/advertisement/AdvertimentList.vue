@@ -81,7 +81,7 @@
 							<v-icon>visibility</v-icon>
 						</v-btn>
 						<template v-if="props.item.status === 2 || props.item.status === 5">
-							<v-btn @click="updateAdvertisement(props.item.id)" flat icon color="blue" class="ma-0">
+							<v-btn v-bind:disabled="props.item.rest == 15" @click="updateAdvertisement(props.item.id)" flat icon color="blue" class="ma-0">
 								<v-icon>arrow_upward</v-icon>
 							</v-btn>
 						</template>
@@ -195,6 +195,7 @@
         };
         store.dispatch('ad/AD_LIST', params)
           .then(res => {
+            console.log(res);
             this.items = [];
             this.totalPages = 1;
             this.totalPages = res.body._meta.pageCount;
