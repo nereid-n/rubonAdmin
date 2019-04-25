@@ -75,16 +75,21 @@
       await store.dispatch('user/USER_ME')
         .then(
           (res) => {
-            this.$store.commit('user/userMe', {
-              username: res.body.username,
-              email: res.body.email,
-              id: res.body.id,
-              name: res.body.profile.name,
-              public_email: res.body.profile.public_email,
-              website: res.body.profile.website,
-              avatar: res.body.profile.avatar,
-            });
-            this.getUserFlag = true
+            console.log(res);
+            if(res.body.status === 401) {
+              window.location.href = '/';
+            } else {
+              this.$store.commit('user/userMe', {
+                username: res.body.username,
+                email: res.body.email,
+                id: res.body.id,
+                name: res.body.profile.name,
+                public_email: res.body.profile.public_email,
+                website: res.body.profile.website,
+                avatar: res.body.profile.avatar,
+              });
+              this.getUserFlag = true
+            }
           }
         );
     },
