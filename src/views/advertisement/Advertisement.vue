@@ -44,6 +44,7 @@
             .then(resCategory => {
               this.value[`Ads[category_id]`] = resCategory.body.name;
               this.value[`Ads[city_id]`] = res.body.region.name + ' / ' + res.body.city.name;
+              this.value[`Ads[email]`] = this.$store.state.user.public_email;
               store.dispatch('category/ADD_FIELD', {id: res.body.category_id})
                 .then(resAddField => {
                   for (let i = 0; i < resAddField.body.length; i++) {
