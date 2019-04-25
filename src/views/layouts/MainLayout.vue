@@ -1,7 +1,30 @@
 <template>
   <div>
-    <Navigation :drawer="drawer"/>
-    <Toolbar @toggleDrawer="toggleDrawer"/>
+    <v-navigation-drawer
+      fixed
+      v-model="drawer"
+      app
+    >
+      <v-list dense>
+        <v-list-tile v-for="item in items"
+                     :to="item.to"
+                     :key="item.name"
+        >
+          <v-list-tile-content>
+            <v-list-tile-title>{{item.name}}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar color="blue" dark fixed app>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>
+        {{$route.meta.title}}
+        <template v-if="$route.meta.id">
+          {{$route.params.id}}
+        </template>
+      </v-toolbar-title>
+    </v-toolbar>
     <v-content>
       <v-container grid-list-xl v-if="getUserFlag">
         <slot/>
@@ -23,7 +46,29 @@
     data() {
       return {
         drawer: true,
-        getUserFlag: false
+        getUserFlag: false,
+        items: [
+          {
+            name: 'Объявления',
+            to: '/cabinet/ads'
+          },
+          {
+            name: 'Добавить объявление',
+            to: '/cabinet/ad/add'
+          },
+          {
+            name: 'Профиль',
+            to: '/cabinet/profile'
+          },
+          {
+            name: 'Аккаунт',
+            to: '/cabinet/account'
+          },
+          {
+            name: 'Соцсети',
+            to: '/cabinet/networks'
+          }
+        ]
       }
     },
     methods: {
@@ -57,5 +102,10 @@
 </script>
 
 <style scoped>
-
+  .v-toolbar--fixed {
+    z-index: 4;
+  }
+  .v-navigation-drawer {
+    z-index: 5;
+  }
 </style>

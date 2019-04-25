@@ -46,7 +46,7 @@
           .then(answer => {
             if (answer) {
 	            let formData = new FormData();
-	            if (this.value.avatar.length === 0) {
+	            if (this.value.avatar === undefined) {
                 this.value.avatar = null;
               }
               else {
@@ -75,13 +75,14 @@
       };
       store.dispatch('user/USER_ME', params)
         .then(res => {
+          console.log(res);
           for (let key in res.body.profile) {
             if (key !== 'avatar') {
               this.value[`Profile[${key}]`] = res.body.profile[key];
             }
             else {
               if (res.body.profile[key]  !== null) {
-                this.value[key] = ['https://rub-on.ru/' + res.body.profile[key]];
+                this.value[key] = [res.body.profile[key]];
               }
             }
           }
