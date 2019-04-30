@@ -24,6 +24,12 @@
           {{$route.params.id}}
         </template>
       </v-toolbar-title>
+      <v-toolbar-items class="hidden-sm-and-down ml-auto">
+        <form action="/user/logout" method="post" class="ml-auto">
+          <input type="hidden" name="_csrf" :value="csrf">
+          <v-btn type="submit" flat>Выход</v-btn>
+        </form>
+      </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <v-container grid-list-xl v-if="getUserFlag">
@@ -45,6 +51,7 @@
     components: {Footer},
     data() {
       return {
+        csrf: '',
         drawer: true,
         getUserFlag: false,
         items: [
@@ -75,18 +82,18 @@
       await store.dispatch('user/USER_ME')
         .then(
           (res) => {
-            console.log(res);
             if(res.body.status === 401) {
               window.location.href = '/';
             } else {
+              this.csrf = res.body.csrf;
               this.$store.commit('user/userMe', {
-                username: res.body.username,
-                email: res.body.email,
-                id: res.body.id,
-                name: res.body.profile.name,
-                public_email: res.body.profile.public_email,
-                website: res.body.profile.website,
-                avatar: res.body.profile.avatar,
+                username: res.body.user.username,
+                email: res.body.user.email,
+                id: res.body.user.id,
+                name: res.body.user.profile.name,
+                public_email: res.body.user.profile.public_email,
+                website: res.body.user.profile.website,
+                avatar: res.body.user.profile.avatar,
               });
               this.getUserFlag = true
             }

@@ -57,8 +57,8 @@
       let params = {};
       store.dispatch('user/USER_ME', params)
         .then(res => {
-          for (let key in res.body) {
-            this.value[`settings-form[${key}]`] = res.body[key];
+          for (let key in res.body.user) {
+            this.value[`settings-form[${key}]`] = res.body.user[key];
           }
           this.getDataDone = true;
         });

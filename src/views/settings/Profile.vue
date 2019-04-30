@@ -74,13 +74,13 @@
       };
       store.dispatch('user/USER_ME', params)
         .then(res => {
-          for (let key in res.body.profile) {
+          for (let key in res.body.user.profile) {
             if (key !== 'avatar') {
-              this.value[`Profile[${key}]`] = res.body.profile[key];
+              this.value[`Profile[${key}]`] = res.body.user.profile[key];
             }
             else {
-              if (res.body.profile[key]  !== null) {
-                this.value[key] = [res.body.profile[key]];
+              if (res.body.user.profile[key]  !== null) {
+                this.value[key] = [res.body.user.profile[key]];
               }
             }
           }
