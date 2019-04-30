@@ -25,7 +25,7 @@
         </template>
       </v-toolbar-title>
       <v-toolbar-items class="hidden-sm-and-down ml-auto">
-        <form action="/user/logout" method="post" class="ml-auto">
+        <form action="/user/logout" method="post" class="ml-auto d-flex">
           <input type="hidden" name="_csrf" :value="csrf">
           <v-btn type="submit" flat>Выход</v-btn>
         </form>
