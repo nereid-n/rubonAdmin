@@ -26,10 +26,10 @@ export default new Router({
       meta: {action: 'CREATE', title: 'Добавление объявления'}
     },
     {
-      path: '/cabinet/favorites',
-      name: 'favorites',
+      path: '/cabinet/favourites',
+      name: 'favourites',
       component: AdvertimentsFavorites,
-      meta: {action: 'DELETE', title: 'Избранные',},
+      meta: {title: 'Избранные',},
     },
     {
       path: '/cabinet/ad/update/:id',

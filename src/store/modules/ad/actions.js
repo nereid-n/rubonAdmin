@@ -108,7 +108,7 @@ export default {
   },
   'AD_DELETE': async (context, params) => {
     params.api_key = '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e';
-    return await Vue.http.post(`${process.env.VUE_APP_API_URL}favourite/del-favourites`, params)
+    return await Vue.http.post(`${process.env.VUE_APP_API_URL}favourite/del-favourites`, {params: params})
       .then(
         res => {
           return res;

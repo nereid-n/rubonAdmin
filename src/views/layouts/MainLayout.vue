@@ -64,7 +64,7 @@
           },
           {
             name: 'Избранные',
-            to: '/cabinet/favorites'
+            to: '/cabinet/favourites'
           },
           {
             name: 'Добавить объявление',
