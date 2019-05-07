@@ -6,6 +6,9 @@
       app
     >
       <v-list dense>
+        <div class="main-page">
+          <a href="/">Главная</a>
+        </div>
         <v-list-tile v-for="item in items"
                      :to="item.to"
                      :key="item.name"
@@ -58,6 +61,10 @@
           {
             name: 'Объявления',
             to: '/cabinet/ads'
+          },
+          {
+            name: 'Избранные',
+            to: '/cabinet/favorites'
           },
           {
             name: 'Добавить объявление',
@@ -114,5 +121,45 @@
   }
   .v-navigation-drawer {
     z-index: 5;
+  }
+  .main-page {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: inherit;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    height: 48px;
+    margin: 0;
+    padding: 0 16px;
+    position: relative;
+    text-decoration: none;
+    -webkit-transition: background .3s cubic-bezier(.25,.8,.5,1);
+    transition: background .3s cubic-bezier(.25,.8,.5,1);
+    transition: none;
+    font-weight: 500;
+    height: 40px;
+  }
+  .main-page a {
+    height: 24px;
+    line-height: 24px;
+    position: relative;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none;
+    color: rgba(0,0,0,.87);
+    -webkit-transition: .3s cubic-bezier(.25,.8,.5,1);
+    transition: .3s cubic-bezier(.25,.8,.5,1);
+    width: 100%;
+    font-size: 13px;
+    outline: none;
+  }
+  .main-page:hover {
+    background: rgba(0,0,0,.04);
   }
 </style>

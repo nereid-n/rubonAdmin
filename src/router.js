@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import AdvertisementAdd from "./views/advertisement/AdvertisementAdd";
 import Advertisement from "./views/advertisement/Advertisement";
 import AdvertimentList from "./views/advertisement/AdvertimentList";
+import AdvertimentsFavorites from "./views/advertisement/AdvertimentsFavorites";
 import Profile from "./views/settings/Profile";
 import Account from "./views/settings/Account";
 import Networks from "./views/settings/Networks";
@@ -23,6 +24,12 @@ export default new Router({
       name: 'ad-add',
       component: AdvertisementAdd,
       meta: {action: 'CREATE', title: 'Добавление объявления'}
+    },
+    {
+      path: '/cabinet/favorites',
+      name: 'favorites',
+      component: AdvertimentsFavorites,
+      meta: {action: 'DELETE', title: 'Избранные',},
     },
     {
       path: '/cabinet/ad/update/:id',
