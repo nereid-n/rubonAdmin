@@ -2,10 +2,10 @@
   <v-layout row wrap>
     <v-flex md8 xs12 class="pos-relative">
       <v-text-field
-          :label="data.label"
-          :name="data.name"
-          @focus="focus"
-          @blur="blur"
+        :label="data.label"
+        :name="data.name"
+        @focus="focus"
+        @blur="blur"
       >
       </v-text-field>
 
@@ -74,21 +74,25 @@
     },
     methods: {
       change(e) {
-        for (let i = 0; i < e.target.files.length; i++) {
-          let file = e.target.files.item(i);
-          // let formData = new FormData();
-          // formData.append('file', file);
-          if (this.data.multiple) {
-            // this.newValue.push(formData);
-            this.newValue.push(file);
+        if (e.target.files[0].size > 4000000) {
+          alert("Файл больше 4мб");
+        } else {
+          for (let i = 0; i < e.target.files.length; i++) {
+            let file = e.target.files.item(i);
+            // let formData = new FormData();
+            // formData.append('file', file);
+            if (this.data.multiple) {
+              // this.newValue.push(formData);
+              this.newValue.push(file);
+            } else {
+              this.newValue = [];
+              // this.newValue[0] = formData;
+              this.newValue[0] = file;
+            }
+            this.input(this.newValue);
           }
-          else {
-            this.newValue = [];
-            // this.newValue[0] = formData;
-            this.newValue[0] = file;
-          }
-          this.input(this.newValue);
         }
+
       },
       preview(file) {
         // return URL.createObjectURL(file.get('file'));
@@ -102,8 +106,7 @@
     created() {
       if (this.value !== '') {
         this.newValue = this.value;
-      }
-      else {
+      } else {
         this.newValue = [];
       }
       if (window.innerWidth < 920) {
@@ -123,6 +126,7 @@
     width: calc(100% - 23px);
     opacity: 0;
   }
+
   .btn-upload {
     position: absolute;
     top: 28px;

@@ -65,7 +65,7 @@ export default new Router({
       path: '/cabinet/ad/:id',
       name: 'ad',
       component: Advertisement,
-      meta: {title: 'Просмотри объявления ', id: true}
+      meta: {title: 'Просмотр объявления ', id: true}
     },
     {
       path: '/cabinet/profile',

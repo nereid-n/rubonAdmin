@@ -45,6 +45,9 @@
 				<td v-html="props.item.updated"></td>
 				<td>
 					<div class="last-td">
+						<v-btn :to="`/cabinet/ad/${props.item.id}`" flat icon color="blue" class="ma-0">
+							<v-icon>visibility</v-icon>
+						</v-btn>
 						<v-btn @click="deleteAdvertisement(props.item.id)" flat icon color="blue" class="ma-0">
 							<v-icon>delete</v-icon>
 						</v-btn>
@@ -118,7 +121,6 @@
         store.dispatch('ad/AD_FAVOURITE', params)
           .then(res => {
             this.items = [];
-            console.log(res);
             if (res.body.ads.length > 0) {
               for (let value of res.body.ads) {
                 value.dt_add = new Date(value.dt_add * 1000);
