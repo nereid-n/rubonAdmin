@@ -12,7 +12,7 @@
       <input type="file"
              class="input-upload"
              @input="change"
-             accept="image/*"
+             accept="image/*, video/*"
              :multiple="data.multiple"
       >
       <v-btn class="btn-upload">Browse</v-btn>
