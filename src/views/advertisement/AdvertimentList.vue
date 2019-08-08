@@ -206,8 +206,10 @@
                 let updated = value.dt_update.toLocaleDateString();
                 let rest = 15 - value.days;
                 let img = '';
-                if (value.adsImgs.length > 0) {
-                  img = value.adsImgs[0].img;
+                if(value.adsGifs.length > 0){
+                	img = value.adsGifs[0].img_thumb;
+				}else if(value.adsImgs.length > 0) {
+                  img = value.adsImgs[0].img_thumb;
                 }
                 this.items.push({
                   img: img,

@@ -127,8 +127,10 @@
                 value.dt_update = new Date(value.dt_update * 1000);
                 let updated = value.dt_update.toLocaleDateString();
                 let img = '';
-                if (value.adsImgs.length > 0) {
-                  img = value.adsImgs[0].img;
+                if(value.adsGifs.length > 0){
+                	img = value.adsGifs[0].img_thumb;
+				}else if (value.adsImgs.length > 0) {
+                  img = value.adsImgs[0].img_thumb;
                 }
                 this.items.push({
                   img: img,

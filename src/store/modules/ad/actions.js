@@ -6,7 +6,7 @@ export default {
       params.data = {};
     }
     params.data.api_key = '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e';
-    params.data.expand = 'adsImgs,adsFieldsValues,city,region,categoryAds';
+    params.data.expand = 'adsImgs,adsGifs,adsFieldsValues,city,region,categoryAds';
     return await Vue.http.get(`${process.env.VUE_APP_API_URL}items/${params.id}`, {params: params.data})
       .then(
         res => {
@@ -23,7 +23,7 @@ export default {
       params.data = {};
     }
     params.data.api_key = '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e';
-    params.data.expand = 'days,adsImgs,adsFieldsValues,city,region,categoryAds';
+    params.data.expand = 'days,adsImgs,adsGifs,adsFieldsValues,city,region,categoryAds';
     return await Vue.http.get(`${process.env.VUE_APP_API_URL}items/${params.id}`, {params: params.data})
       .then(
         res => {
@@ -38,7 +38,7 @@ export default {
   'AD_LIST': async (context, params) => {
     params.data.limit = 10;
     params.data.api_key = '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e';
-    params.data.expand = 'days,adsImgs,adsFieldsValues,city,region,categoryAds';
+    params.data.expand = 'days,adsImgs,adsGifs,adsFieldsValues,city,region,categoryAds';
     return await Vue.http.get(`${process.env.VUE_APP_API_URL}items/index`, {params: params.data})
       .then(
         res => {
@@ -94,7 +94,7 @@ export default {
   },
   'AD_FAVOURITE': async (context, params) => {
     params.data.api_key = '$2y$13$ZqWntDlaRGERxLUxNZbRXOy549OmSc2C3o9ehreZejXBScFbfqN5e';
-    params.data.expand = 'adsImgs,adsFieldsValues,categoryAds';
+    params.data.expand = 'adsImgs,adsGifs,adsFieldsValues,categoryAds';
     return await Vue.http.get(`${process.env.VUE_APP_API_URL}favourite/get-favourites`, {params: params.data})
       .then(
         res => {

@@ -28,6 +28,7 @@
         >
           <v-card>
             <v-img v-if="typeof file === 'string'" :src="file"/>
+            <v-img v-else-if="file.type === 'video/mp4'" :src="images.videoStub" />
             <v-img v-else :src="preview(file)"/>
 
             <v-card-title>
@@ -46,6 +47,7 @@
         >
           <v-card>
             <v-img v-if="typeof file === 'string'" :src="file"/>
+            <v-img v-else-if="file.type === 'video/mp4'" :src="images.videoStub" />
             <v-img v-else :src="preview(file)"/>
 
             <v-card-title>
@@ -70,6 +72,9 @@
       return {
         newValue: [],
         smallSizeWindow: false,
+        images: {
+          videoStub: require('../../assets/video-stub.png')
+        }
       }
     },
     methods: {

@@ -36,7 +36,7 @@
       store.dispatch('ad/AD', apiData)
         .then(res => {
           for (let key in res.body) {
-            if (key !== 'adsFieldsValues' && key !== 'adsImgs') {
+            if (key !== 'adsFieldsValues' && key !== 'adsImgs' && key !== 'adsGifs') {
               this.value[`Ads[${key}]`] = res.body[key];
             }
           }
@@ -61,6 +61,9 @@
                     else {
                       if (name === 'file[]') {
                         value = '<div class="table-img-wrap">'
+                        for(let gif of res.body.adsGifs){
+                          value += `<div class="table-img"><img src="${gif.img}"></div>`;
+                        }
                         for (let valueImg of res.body.adsImgs) {
                           value += `<div class="table-img"><img src="${valueImg.img}"></div>`;
                         }
