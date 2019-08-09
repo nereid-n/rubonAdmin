@@ -79,8 +79,8 @@
     },
     methods: {
       change(e) {
-        if (e.target.files[0].size > 4000000) {
-          alert("Файл больше 4мб");
+        if (e.target.files[0].size > 10000000) {
+          alert("Файл больше 10мб");
         } else {
           for (let i = 0; i < e.target.files.length; i++) {
             let file = e.target.files.item(i);

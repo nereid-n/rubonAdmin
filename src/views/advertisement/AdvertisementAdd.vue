@@ -57,7 +57,7 @@
                   for (let j in this.value[key]) {
                     if (typeof this.value[key][j] === 'string') {
                       for (let imgIndex = 0; imgIndex < this.value.images.length; imgIndex++) {
-                        if (this.value.images[imgIndex].img === this.value[key][j]) {
+                        if (this.value.images[imgIndex].img_thumb === this.value[key][j]) {
                           pictures.push(this.value.images[imgIndex]);
                         }
                       }
@@ -143,12 +143,12 @@
                 }
               }
               for (let value of res.body.adsGifs) {
-                this.value['file[]'].push(value.img);
-                this.value.images.push({img: value.img, img_thumb: value.img_thumb});
+                this.value['file[]'].push(value.img_thumb);
+                this.value.images.push({img: value.img, img_thumb: value.img_thumb, type: 'gif'});
               }
               for (let value of res.body.adsImgs) {
-                this.value['file[]'].push(value.img);
-                this.value.images.push({img: value.img, img_thumb: value.img_thumb});
+                this.value['file[]'].push(value.img_thumb);
+                this.value.images.push({img: value.img, img_thumb: value.img_thumb, type: 'img'});
               }
               store.dispatch('category/ADD_FIELD', {id: this.value['Ads[category_id]']})
                 .then(res => {

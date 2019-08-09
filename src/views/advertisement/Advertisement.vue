@@ -62,10 +62,10 @@
                       if (name === 'file[]') {
                         value = '<div class="table-img-wrap">'
                         for(let gif of res.body.adsGifs){
-                          value += `<div class="table-img"><img src="${gif.img}"></div>`;
+                          value += `<div class="table-img"><img src="${gif.img_thumb}"></div>`;
                         }
                         for (let valueImg of res.body.adsImgs) {
-                          value += `<div class="table-img"><img src="${valueImg.img}"></div>`;
+                          value += `<div class="table-img"><img src="${valueImg.img_thumb}"></div>`;
                         }
                         value += '</div>';
                       }
